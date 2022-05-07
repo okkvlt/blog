@@ -170,3 +170,7 @@ $(".livro").hover(function () {
     $(autor).css({"font-weight": "", "color": "rgb(126, 126, 126)"});
     $(text).css({"font-weight": "", "color": "rgb(151, 151, 151)"});
 });
+
+$(".apresentation-button").click(function () {
+    window.location.href = "/sobre";
+});
