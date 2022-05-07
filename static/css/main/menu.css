@@ -88,6 +88,12 @@ h4 {
     width: 100%;
     border-radius: 5px;
     border: rgb(207, 207, 207) solid 1px;
+    color: rgb(155, 155, 155);
+    outline: none;
+}
+
+#search-input::placeholder{
+    color: rgb(155, 155, 155);
 }
 
 .index-widgets {
