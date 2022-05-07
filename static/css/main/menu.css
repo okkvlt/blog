@@ -93,7 +93,7 @@ h4 {
 .index-widgets {
     background-color: #daf2e2;
     padding: 10px;
-    border-radius: 7px;
+    border-radius: 5px;
 }
 
 .index-widgets a {
@@ -103,5 +103,5 @@ h4 {
 .index-main {
     background-color: rgb(250, 250, 250);
     padding: 10px;
-    border-radius: 7px;
+    border-radius: 5px;
 }
