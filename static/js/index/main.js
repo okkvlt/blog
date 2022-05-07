@@ -17,6 +17,8 @@ if (width < 750) {
         "border-radius": "0"
     });
 
+    $(".apresentation-text").css("padding", "0px 0px");
+
     open_submenu();
     center_banner();
     drop_menu();
@@ -48,6 +50,8 @@ $(window).resize(function () {
             "border-radius": "0"
         });
 
+        $(".apresentation-text").css("padding", "0px 0px");
+
         $(".submenu-hover").hover(open_submenu, open_submenu);
 
         open_submenu();
@@ -61,6 +65,8 @@ $(window).resize(function () {
             "position": "absolute",
             "border-radius": "5px"
         });
+
+        $(".apresentation-text").css("padding", "20px 75px");
 
         $(".submenu-hover").hover(open_submenu, close_submenu);
 
