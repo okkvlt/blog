@@ -112,7 +112,7 @@ $(".post").hover(function () {
     let title = "#" + id + "-title";
     let text = "#" + id + "-text";
 
-    $(icon).css({"filter": "contrast(125%) brightness(100%)"});
+    $(icon).css({"filter": "contrast(145%) brightness(100%)"});
     $(title).css({"font-weight": "lighter", "color": "rgb(80, 80, 80)"});
     $(text).css({"font-weight": "lighter", "color": "rgb(100, 100, 100)"});
 }, function () {
