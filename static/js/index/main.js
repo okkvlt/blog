@@ -100,7 +100,7 @@ $("#scrolltop").click(function () {
 
 $(".submenu .item").click(function () {
     let pid = $(this).attr("id");
-    window.location.href = "/posts/" + pid;
+    window.location.href = "/posts/category_" + pid;
 });
 
 $(".content-post").css("height", icon_post);
@@ -125,4 +125,10 @@ $(".post").hover(function () {
     $(icon).css({"filter": "contrast(100%) brightness(65%)"});
     $(title).css({"font-weight": "", "color": "rgb(126, 126, 126)"});
     $(text).css({"font-weight": "", "color": "rgb(151, 151, 151)"});
+});
+
+$(".post").click(function () {
+    let id = $(this).attr("id");
+
+    window.location.href = "/posts/" + id;
 });
