@@ -91,13 +91,23 @@ h4 {
 }
 
 .index-widgets {
-    background-color: #daf2e2;
+    background-color: #87ad93;
     padding: 10px;
     border-radius: 5px;
 }
 
 .index-widgets a {
-    color: rgb(107, 107, 107);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 15px;
+    color: #fff;
+}
+
+.index-widgets li {
+    color: #fff;
+}
+
+.index-widgets h4 {
+    color: #fff;
 }
 
 .index-main {

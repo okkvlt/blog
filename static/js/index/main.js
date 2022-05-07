@@ -104,3 +104,25 @@ $(".submenu .item").click(function () {
 });
 
 $(".content-post").css("height", icon_post);
+
+$(".post").hover(function () {
+    let id = $(this).attr("id");
+    
+    let icon = "#" + id + "-icon";
+    let title = "#" + id + "-title";
+    let text = "#" + id + "-text";
+
+    $(icon).css({"filter": "contrast(125%) brightness(100%)"});
+    $(title).css({"font-weight": "lighter", "color": "rgb(80, 80, 80)"});
+    $(text).css({"font-weight": "lighter", "color": "rgb(100, 100, 100)"});
+}, function () {
+    let id = $(this).attr("id");
+    
+    let icon = "#" + id + "-icon";
+    let title = "#" + id + "-title";
+    let text = "#" + id + "-text";
+
+    $(icon).css({"filter": "contrast(100%) brightness(65%)"});
+    $(title).css({"font-weight": "", "color": "rgb(126, 126, 126)"});
+    $(text).css({"font-weight": "", "color": "rgb(151, 151, 151)"});
+});
