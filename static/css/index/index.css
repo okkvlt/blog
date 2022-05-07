@@ -1,3 +1,49 @@
+/* APRESENTATION */
+
+.apresentation{
+    transition: all 1s;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
+    background-position: center;
+    background-repeat: no repeat;
+    background-size: 115%;
+    filter: contrast(115%);
+}
+
+.apresentation:hover{
+    filter: contrast(125%) brightness(80%);
+}
+
+.apresentation-title{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 35px;
+    font-weight: 900;
+    text-align: center;
+}
+
+.apresentation-text{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 20px;
+    text-align: justify;
+    color: white;
+    padding: 20px 75px;
+}
+
+.apresentation-button{
+    transition: all 0.6s;
+    background-color: #87ad93;
+    width: 150px;
+    height: 50px;
+    outline: none;
+    border: none;
+    border-radius: 25px;
+    color: white;
+}
+
+.apresentation-button:hover{
+    background-color: #5c7a65;
+}
+
+
 /* POSTS */
 
 .icon-post {
