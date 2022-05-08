@@ -5,7 +5,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Index page.</title>
+    <title>{{ config.0 }} — {{ config.1 }}</title>
     <link rel="icon" href="https://pulvissolaris.files.wordpress.com/2021/01/cropped-triskelion.png" />
 
     <!--BOOTSTRAP n' JQUERY-->
@@ -30,8 +30,8 @@
             </div>
             <div class="col-sm-10">
                 <h1 style="color: #87ad93">
-                    {{ blog_name }}<br>
-                    <small>{{ blog_status }}</small>
+                    {{ config.0 }}<br>
+                    <small>{{ config.1 }}</small>
                 </h1>
             </div>
         </div>
@@ -194,7 +194,7 @@
 
     <br>
     <div class="container-fluid footer">
-        <p>© {{ blog_name }}, {{ year }}. Feito por {{ owner }}.</p>
+        <p>© {{ config.0 }}, {{ config.2 }}. Feito por {{ config.3 }}.</p>
     </div>
 
 </body>

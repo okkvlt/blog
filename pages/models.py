@@ -42,13 +42,14 @@ class Livros(models.Model):
         return self.title
 
 class Config(models.Model):
-    blog_name = models.CharField("Nome do Blog", max_length=100)
-    blog_status = models.CharField("Status do Blog", max_length=100)
-    year = models.IntegerField("Publicação", null=False)
-    color = models.CharField("Cor", max_length=100)
+    name = models.CharField("Nome do Blog", max_length=100, null=False, default="[Nome do Blog]")
+    status = models.CharField("Status do Blog", max_length=100, null=False, default="[Status do Blog]")
+    owner = models.CharField("Dono do Blog", max_length=100, null=False, default="[Dono do Blog]")
+    year = models.IntegerField("Publicação", null=False, default="0000")
+    color = models.CharField("Cor", max_length=100, null=False, default="#87ad93")
 
     class Meta:
         db_table = "configs"
 
     def __str__(self):
-        return self.blog_name
+        return self.name

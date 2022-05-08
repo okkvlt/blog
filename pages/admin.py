@@ -5,7 +5,7 @@ from sympy import Li
 from .models import *
 
 class ConfigList(admin.ModelAdmin):
-    list_display = ("blog_name", "blog_status", "year", "color")
+    list_display = ("name", "status", "owner", "year", "color")
 
 class CategoryList(admin.ModelAdmin):
     list_display = ("nome", "descricao")
