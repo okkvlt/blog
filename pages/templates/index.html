@@ -30,8 +30,8 @@
             </div>
             <div class="col-sm-10">
                 <h1 style="color: #87ad93">
-                    Blog Name<br>
-                    <small>"This is a small."</small>
+                    {{ blog_name }}<br>
+                    <small>{{ blog_status }}</small>
                 </h1>
             </div>
         </div>
@@ -90,78 +90,32 @@
                     <br>
                 </div>
 
-                <h2>Últimas Postagens</h2>
-                <br>
-                <div id="1" class="row post">
-                    <div class="col-sm-3">
-                        <div id="1-icon"
-                            style="background-image: url('https://pulvissolaris.files.wordpress.com/2020/11/the_riders_of_the_sidhe__john_duncan_1911_mcmanus_galleries__dundee__sevenseaocean_creative_commmons.jpg');"
-                            class="icon-post"></div>
-                    </div>
-                    <div class="col-sm-9 content-post insert-br-xs">
-                        <div class="data-post">20/02/2022</div>
-                        <h2 id="1-title" class="title-post">Title Post 1</h2>
-                        <div id="1-text" class="text-post">
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                            ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                            voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                            cupidatat
-                            non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                {% if posts %}
+                    <h2>Últimas Postagens</h2>
+                    <br>
+                {% endif %}
+                {% for id, title, text, image, date, author in posts %}
+                    <div id="{{ id }}" class="row post">
+                        <div class="col-sm-3">
+                            <div id="{{ id }}-icon"
+                                style="background-image: url('{{ image.url }}');"
+                                class="icon-post">
+                            </div>
                         </div>
-                        <div class="author-post">
-                            Author: Ruan
-                        </div>
-                    </div>
-                </div>
-                <br>
-                <div id="2" class="row post">
-                    <div class="col-sm-3">
-                        <div id="2-icon"
-                            style="background-image: url('https://pulvissolaris.files.wordpress.com/2021/01/unnamed-1.jpg');"
-                            class="icon-post"></div>
-                    </div>
-                    <div class="col-sm-9 content-post insert-br-xs">
-                        <div class="data-post">20/02/2022</div>
-                        <h2 id="2-title" class="title-post">Title Post 2</h2>
-                        <div id="2-text" class="text-post">
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                            ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                            voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                            cupidatat
-                            non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                        </div>
-                        <div class="author-post">
-                            Author: Ruan
+                        <div class="col-sm-9 content-post insert-br-xs">
+                            <div class="data-post">{{ date|date:'d/m/y' }}</div>
+                            <h2 id="{{ id }}-title" class="title-post">{{ title }}</h2>
+                            <div id="{{ id }}-text" class="text-post">
+                                {{ text }}
+                            </div>
+                            <div class="author-post">
+                                Autor: {{ author }}
+                            </div>
                         </div>
                     </div>
-                </div>
-                <br>
-                <div id="3" class="row post">
-                    <div class="col-sm-3">
-                        <div id="3-icon"
-                            style="background-image: url('https://pulvissolaris.files.wordpress.com/2021/01/784e6dc6e139489a771cad9bd8c72b57-e1611687592544.jpg');"
-                            class="icon-post"></div>
-                    </div>
-                    <div class="col-sm-9 content-post insert-br-xs">
-                        <div class="data-post">20/02/2022</div>
-                        <h2 id="3-title" class="title-post">Title Post 3</h2>
-                        <div id="3-text" class="text-post">
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                            ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                            voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                            cupidatat
-                            non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                        </div>
-                        <div class="author-post">
-                            Author: Ruan
-                        </div>
-                    </div>
-                </div>
+                    <br>
+                {% endfor %}
 
-                <br>
                 <h2 style="margin-top: 10px">Últimos Livros</h2>
                 <br>
                 <div class="row">
@@ -240,7 +194,7 @@
 
     <br>
     <div class="container-fluid footer">
-        <p>© Blog Name, 2022. Feito por Ruan.</p>
+        <p>© {{ blog_name }}, {{ year }}. Feito por {{ owner }}.</p>
     </div>
 
 </body>
