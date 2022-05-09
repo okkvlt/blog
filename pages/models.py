@@ -70,9 +70,9 @@ class Config(models.Model):
 
 class Colors(models.Model):
     main = models.CharField("Main Color", max_length=10, null=False, default="#87ad93")
-    strong = models.CharField("Main Color", max_length=10, null=False, default="#526e5b")
-    neutral = models.CharField("Main Color", max_length=10, null=False, default="#cccccc")
-    lighter = models.CharField("Main Color", max_length=10, null=False, default="#e6f8ec")
+    strong = models.CharField("Strong Color", max_length=10, null=False, default="#526e5b")
+    neutral = models.CharField("Neutral Color", max_length=10, null=False, default="#cccccc")
+    lighter = models.CharField("Lighter Color", max_length=10, null=False, default="#e6f8ec")
     
     class Meta:
         db_table = "colors"
