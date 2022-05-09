@@ -142,12 +142,12 @@
                     {% for id, title, author, banner, descricao in livros %}
                     <div class="col-sm-4">
                         <div id="{{ id }}" class="thumbnail livro">
-                            <div id="{{ id }}-livro-icon"
-                                style="background-image: url('{{ banner.url }}');"
+                            <div id="{{ id }}-livro-icon" style="background-image: url('{{ banner.url }}');"
                                 class="icon-livro"></div>
                             <div class="caption">
                                 <h4 id="{{ id }}-livro-title" class="title-livro">Livro: <small>{{ title }}</small></h4>
-                                <h4 id="{{ id }}-livro-autor" class="title-livro">Autor: <small>{{ author }}</small></h4>
+                                <h4 id="{{ id }}-livro-autor" class="title-livro">Autor: <small>{{ author }}</small>
+                                </h4>
                                 <p id="{{ id }}-livro-text" class="text-livro">
                                     {{ descricao }}
                                 </p>
@@ -174,8 +174,9 @@
                             <ul style="margin-top: 5px;">
                                 {% for month, info in data.1.items %}
                                 <li style="padding: 2px;">
-                                    <a href="posts/{{ year }}/{{ month }}/">{{ info.0 }} <span class="badge">{{ info.1
-                                            }}</span></a>
+                                    <a href="posts/{{ year }}/{{ month }}/">
+                                        {{ info.0 }} <span class="badge">{{ info.1 }}</span>
+                                    </a>
                                     <br>
                                 </li>
                                 {% endfor %}
