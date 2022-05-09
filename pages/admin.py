@@ -6,6 +6,9 @@ from .models import *
 
 class ConfigList(admin.ModelAdmin):
     list_display = ("name", "status", "owner", "year", "color")
+    
+class ApresentationList(admin.ModelAdmin):
+    list_display = ("title", "text", "background")
 
 class CategoryList(admin.ModelAdmin):
     list_display = ("nome", "descricao")
@@ -17,6 +20,7 @@ class LivrosList(admin.ModelAdmin):
     list_display = ("title", "author")
 
 admin.site.register(Config, ConfigList)
+admin.site.register(Apresentacao, ApresentationList)
 admin.site.register(Categorias, CategoryList)
 admin.site.register(Posts, PostsList)
 admin.site.register(Livros, LivrosList)

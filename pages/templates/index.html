@@ -75,14 +75,34 @@
                 <h2>Pagina Inicial</h2>
                 <br>
                 <div class="index-main jumbotron apresentation"
-                     style="background-image: url('https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/romantic-landscape-in-the-evening-edmund-von-worndle.jpg');">
-                    <h1 style="font-size: 40px; color: white" class="apresentation-title">Lorem ipsum</h1>
+                    style="background-image: url('{% if apresentacao %} {{ apresentacao.2.url }} {% else %} images/romantic.jpg {% endif %}');">
+                    <h1 style="font-size: 40px; color: white" class="apresentation-title">
+                        {% if apresentacao %}
+                        {{ apresentacao.0 }}
+                        {% else %}
+                        [Título da Apresentação]
+                        {% endif %}
+                    </h1>
                     <p style="font-size: 16px" class="apresentation-text">
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                        reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                        occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                        {% if apresentacao %}
+                        {{ apresentacao.1 }}
+                        {% else %}
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac nunc quis eros aliquet posuere
+                        eget
+                        vel enim. Morbi nec sem massa. Aliquam eget ante malesuada, elementum magna vitae, ornare metus.
+                        Ut
+                        congue aliquam sagittis. Suspendisse dignissim metus felis, sit amet vestibulum tellus placerat
+                        vitae.
+                        Maecenas vitae mi a diam porta fermentum. Morbi vel hendrerit velit. Quisque mattis nunc dui,
+                        convallis
+                        pharetra diam tristique tristique. Etiam ut lectus rutrum, vehicula massa et, sodales velit.
+                        Quisque
+                        ac ornare lorem. Nullam posuere nec neque id bibendum. Mauris ac imperdiet felis. Vivamus
+                        tincidunt
+                        sollicitudin metus id eleifend. Vestibulum nec felis commodo, tincidunt eros ac, suscipit orci.
+                        Praesent
+                        mollis lacus et nunc egestas varius. Morbi quis metus ultrices, varius ex quis, eleifend felis."
+                        {% endif %}
                     </p>
                     <center>
                         <button class="apresentation-button">Saiba Mais</button>
@@ -91,29 +111,27 @@
                 </div>
 
                 {% if posts %}
-                    <h2>Últimas Postagens</h2>
-                    <br>
+                <h2>Últimas Postagens</h2>
+                <br>
                 {% endif %}
                 {% for id, title, text, image, date, author in posts %}
-                    <div id="{{ id }}" class="row post">
-                        <div class="col-sm-3">
-                            <div id="{{ id }}-icon"
-                                style="background-image: url('{{ image.url }}');"
-                                class="icon-post">
-                            </div>
-                        </div>
-                        <div class="col-sm-9 content-post insert-br-xs">
-                            <div class="data-post">{{ date|date:'d/m/y' }}</div>
-                            <h2 id="{{ id }}-title" class="title-post">{{ title }}</h2>
-                            <div id="{{ id }}-text" class="text-post">
-                                {{ text }}
-                            </div>
-                            <div class="author-post">
-                                Autor: {{ author }}
-                            </div>
+                <div id="{{ id }}" class="row post">
+                    <div class="col-sm-3">
+                        <div id="{{ id }}-icon" style="background-image: url('{{ image.url }}');" class="icon-post">
                         </div>
                     </div>
-                    <br>
+                    <div class="col-sm-9 content-post insert-br-xs">
+                        <div class="data-post">{{ date|date:'d/m/y' }}</div>
+                        <h2 id="{{ id }}-title" class="title-post">{{ title }}</h2>
+                        <div id="{{ id }}-text" class="text-post">
+                            {{ text }}
+                        </div>
+                        <div class="author-post">
+                            Autor: {{ author }}
+                        </div>
+                    </div>
+                </div>
+                <br>
                 {% endfor %}
 
                 <h2 style="margin-top: 10px">Últimos Livros</h2>
@@ -127,7 +145,8 @@
                             <div class="caption">
                                 <h4 id="1-livro-title" class="title-livro">Livro: <small>Enéadas II</small></h4>
                                 <h4 id="1-livro-autor" class="title-livro">Autor: <small>Plotino</small></h4>
-                                <p id="1-livro-text" class="text-livro">Lorem ipsum donec id elit non mi porta gravida at eget metus.</p>
+                                <p id="1-livro-text" class="text-livro">Lorem ipsum donec id elit non mi porta gravida
+                                    at eget metus.</p>
                             </div>
                         </div>
                     </div>
@@ -139,7 +158,8 @@
                             <div class="caption">
                                 <h4 id="2-livro-title" class="title-livro">Livro: <small>Parmênides</small></h4>
                                 <h4 id="2-livro-autor" class="title-livro">Autor: <small>Platão</small></h4>
-                                <p id="2-livro-text" class="text-livro">Lorem ipsum donec id elit non mi porta gravida at eget metus.</p>
+                                <p id="2-livro-text" class="text-livro">Lorem ipsum donec id elit non mi porta gravida
+                                    at eget metus.</p>
                             </div>
                         </div>
                     </div>
@@ -151,7 +171,9 @@
                             <div class="caption">
                                 <h4 id="3-livro-title" class="title-livro">Livro: <small>Filosofia da Arte</small></h4>
                                 <h4 id="3-livro-autor" class="title-livro">Autor: <small>Schelling</small></h4>
-                                <p id="3-livro-text" class="text-livro">Lorem ipsum donec id elit non mi porta gravida at eget metus. Lorem ipsum donec id elit non mi porta gravida at eget metus. Lorem ipsum donec id elit non mi porta gravida at eget metus.</p>
+                                <p id="3-livro-text" class="text-livro">Lorem ipsum donec id elit non mi porta gravida
+                                    at eget metus. Lorem ipsum donec id elit non mi porta gravida at eget metus. Lorem
+                                    ipsum donec id elit non mi porta gravida at eget metus.</p>
                             </div>
                         </div>
                     </div>
