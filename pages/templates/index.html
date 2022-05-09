@@ -134,13 +134,17 @@
                 <li class="nav-item submenu-hover text-center">
                     <a href="/posts">
                         <strong>Posts</strong>
+                        {% if categorias %}
                         <span class="caret"></span>
+                        {% endif %}
                     </a>
+                    {% if categorias %}
                     <div class="submenu">
-                        <button id="1" class="item"><strong>Category 1</strong></button>
-                        <button id="2" class="item"><strong>Category 2</strong></button>
-                        <button id="3" class="item"><strong>Category 3</strong></button>
+                        {% for id, categoria in categorias %}
+                        <button id="{{ id }}" class="item"><strong>{{ categoria }}</strong></button>
+                        {% endfor %}
                     </div>
+                    {% endif %}
                 </li>
                 <li class="nav-item text-center"><a href="/gallery"><strong>Traduções</strong></a></li>
                 <li class="nav-item text-center"><a href="/about"><strong>Sobre</strong></a></li>

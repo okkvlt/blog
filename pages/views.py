@@ -94,6 +94,21 @@ def index(request):
             "#cccccc",
             "#e6f8ec"
         ]
+        
+    categorias = []
+
+    try:
+        db_categorias = Categorias.objects.order_by("-id")
+
+        for categoria in db_categorias:
+            categorias.append(
+                [
+                    categoria.id,
+                    categoria.nome
+                ]
+            )
+    except:
+        pass
 
     site = {
         "config": config,
@@ -102,6 +117,7 @@ def index(request):
         "archive": archive,
         "livros": livros,
         "colors": colors,
+        "categorias": categorias,
     }
 
     return render(request, "index.html", site)
