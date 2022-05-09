@@ -186,29 +186,26 @@
                 </div>
                 <br>
 
+                {% if archive %}
                 <div class="container-fluid index-widgets">
                     <h4 class="text-center">Arquivos</h4>
                     <br>
                     <ul style="margin-top: -10px;">
-                        <li><a href="#">2022 <span class="badge">17</span></a><br>
+                        {% for year, data in archive.items %}
+                        <li><a href="#">{{ year }} <span class="badge">{{ data.0 }}</span></a><br>
                             <ul style="margin-top: 5px;">
-                                <li style="padding: 2px;"><a href="#">Março <span class="badge">5</span></a><br></li>
-                                <li style="padding: 2px;"><a href="#">Fevereiro <span class="badge">10</span></a><br>
+                                {% for month, n in data.1.items %}
+                                <li style="padding: 2px;">
+                                    <a href="#">{{ month }} <span class="badge">{{ n }}</span></a>
+                                    <br>
                                 </li>
-                                <li style="padding: 2px;"><a href="#">Janeiro <span class="badge">2</span></a></li>
+                                {% endfor %}
                             </ul>
                         </li><br>
-                        <li><a href="#">2021 <span class="badge">38</span></a><br>
-                            <ul style="margin-top: 5px;">
-                                <li style="padding: 2px;"><a href="#">Dezembro <span class="badge">5</span></a><br></li>
-                                <li style="padding: 2px;"><a href="#">Outubro <span class="badge">10</span></a><br></li>
-                                <li style="padding: 2px;"><a href="#">Setembro <span class="badge">4</span></a></li>
-                                <li style="padding: 2px;"><a href="#">Agosto <span class="badge">12</span></a></li>
-                                <li style="padding: 2px;"><a href="#">Abril <span class="badge">7</span></a></li>
-                            </ul>
-                        </li>
+                        {% endfor %}
                     </ul>
                 </div>
+                {% endif %}
             </div>
 
         </div>

@@ -2,6 +2,7 @@
 from django.shortcuts import render
 
 from pages.models import *
+from pages.utils import utils
 
 # Create your views here.
 
@@ -56,10 +57,13 @@ def index(request):
     except:
         pass
 
+    archive = utils.get_archive(Posts)
+
     site = {
         "config": config,
         "posts": posts,
         "apresentacao": apresentacao,
+        "archive": archive,
     }
 
     return render(request, "index.html", site)

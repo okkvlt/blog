@@ -14,7 +14,7 @@ class CategoryList(admin.ModelAdmin):
     list_display = ("nome", "descricao")
 
 class PostsList(admin.ModelAdmin):
-    list_display = ("title", "author", "banner")
+    list_display = ("title", "author", "date", "banner")
     
 class LivrosList(admin.ModelAdmin):
     list_display = ("title", "author")
