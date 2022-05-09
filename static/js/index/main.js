@@ -7,7 +7,6 @@ import { insert_br_md, delete_br_md } from '../main/br.js';
 const hHeader = 150;
 
 let width = $(window).width();
-let icon_post = 189.375;
 
 if (width < 750) {
     $(".submenu").css({
@@ -107,68 +106,6 @@ $("#scrolltop").click(function () {
 $(".submenu .item").click(function () {
     let pid = $(this).attr("id");
     window.location.href = "/posts/category_" + pid;
-});
-
-$(".content-post").css("height", icon_post);
-
-$(".post").hover(function () {
-    let id = $(this).attr("id");
-    
-    let icon = "#" + id + "-icon";
-    let title = "#" + id + "-title";
-    let text = "#" + id + "-text";
-
-    $(icon).css({"filter": "contrast(145%) brightness(100%)"});
-    $(title).css({"font-weight": "lighter", "color": "rgb(80, 80, 80)"});
-    $(text).css({"font-weight": "lighter", "color": "rgb(100, 100, 100)"});
-}, function () {
-    let id = $(this).attr("id");
-    
-    let icon = "#" + id + "-icon";
-    let title = "#" + id + "-title";
-    let text = "#" + id + "-text";
-
-    $(icon).css({"filter": "contrast(100%) brightness(65%)"});
-    $(title).css({"font-weight": "", "color": "rgb(126, 126, 126)"});
-    $(text).css({"font-weight": "", "color": "rgb(151, 151, 151)"});
-});
-
-$(".post").click(function () {
-    let id = $(this).attr("id");
-
-    window.location.href = "/posts/" + id;
-});
-
-$(".livro").click(function () {
-    let id = $(this).attr("id");
-
-   window.open("/livros/" + id, "_blank");
-})
-
-$(".livro").hover(function () {
-    let id = $(this).attr("id");
-    
-    let icon = "#" + id + "-livro-icon";
-    let title = "#" + id + "-livro-title";
-    let autor = "#" + id + "-livro-autor";
-    let text = "#" + id + "-livro-text";
-
-    $(icon).css({"filter": "grayscale(30%) contrast(125%) brightness(100%)"});
-    $(title).css({"font-weight": "lighter", "color": "rgb(80, 80, 80)"});
-    $(autor).css({"font-weight": "lighter", "color": "rgb(80, 80, 80)"});
-    $(text).css({"font-weight": "lighter", "color": "rgb(100, 100, 100)"});
-}, function () {
-    let id = $(this).attr("id");
-    
-    let icon = "#" + id + "-livro-icon";
-    let title = "#" + id + "-livro-title";
-    let autor = "#" + id + "-livro-autor";
-    let text = "#" + id + "-livro-text";
-
-    $(icon).css({"filter": "grayscale(0%) contrast(100%) brightness(65%)"});
-    $(title).css({"font-weight": "", "color": "rgb(126, 126, 126)"});
-    $(autor).css({"font-weight": "", "color": "rgb(126, 126, 126)"});
-    $(text).css({"font-weight": "", "color": "rgb(151, 151, 151)"});
 });
 
 $(".apresentation-button").click(function () {

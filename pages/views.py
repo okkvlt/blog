@@ -77,12 +77,30 @@ def index(request):
 
     archive = utils.get_archive(Posts)
 
+    try:
+        db_colors = Colors.objects.order_by("-id")[0]
+
+        colors = [
+            db_colors.main,
+            db_colors.strong,
+            db_colors.neutral,
+            db_colors.lighter
+        ]
+    except:
+        colors = [
+            "#87ad93",
+            "#526e5b",
+            "#cccccc",
+            "#e6f8ec"
+        ]
+
     site = {
         "config": config,
         "posts": posts,
         "apresentacao": apresentacao,
         "archive": archive,
         "livros": livros,
+        "colors": colors,
     }
 
     return render(request, "index.html", site)

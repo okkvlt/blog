@@ -32,17 +32,12 @@
 
 .apresentation-button{
     transition: all 0.6s;
-    background-color: #87ad93;
     width: 150px;
     height: 50px;
     outline: none;
     border: none;
     border-radius: 25px;
     color: white;
-}
-
-.apresentation-button:hover{
-    background-color: #5c7a65;
 }
 
 
@@ -65,8 +60,6 @@
     font-size: 15px;
     font-weight: lighter;
     text-align: center;
-    background-color: #87ad93;
-    color: #fafafa;
     width: 25%;
 }
 
@@ -74,7 +67,6 @@
     margin-top: 10px;
     margin-left: 10px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    color: rgb(126, 126, 126);
     font-size: 25px;
     transition: all 1s;
 }
@@ -143,7 +135,6 @@
 .title-livro {
     text-align: justify;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    color: rgb(126, 126, 126);
     font-size: 20px;
     transition: all 1s;
 

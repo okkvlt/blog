@@ -21,6 +21,95 @@
     <link rel="stylesheet" href="{% static 'css/index/index.css' %}">
 </head>
 
+<style>
+    #navbar {
+        background-color: #fff;
+    }
+
+    #navbar li a {
+        background-color: #fff;
+        color: {{ colors.2 }};
+    }
+
+    #navbar li a:hover {
+        border-bottom: {{ colors.0 }} solid 1px;
+        color: {{ colors.0 }};
+    }
+
+    #navbar li.active a {
+        border-bottom: {{  colors.1 }} solid 1px;
+        color: {{ colors.1 }};
+    }
+
+    #navbar .submenu {
+        background-color: {{ colors.3 }};
+    }
+
+    #navbar .submenu .item {
+        background-color: {{ colors.3 }};
+        color: {{ colors.0 }};
+    }
+
+    #navbar .submenu .item:hover {
+        background-color: {{ colors.0 }};
+        color: {{  colors.1 }};
+    }
+
+    .index-widgets {
+        background-color: {{ colors.0 }};
+    }
+
+    .index-widgets a {
+        color: {{ colors.3 }};
+    }
+
+    .index-widgets li {
+        color: {{ colors.3 }};
+    }
+
+    .index-widgets h4 {
+        color: {{ colors.3 }};
+    }
+
+    .index-main {
+        background-color: {{ colors.0 }};
+    }
+
+    .footer {
+        background-color: {{ colors.0 }};
+    }
+
+    .footer p {
+        color: {{ colors.3 }};
+    }
+
+    h1, h2, h3, h4 {
+        color: {{  colors.1 }};
+    }
+
+    .apresentation-button {
+        background-color: {{ colors.0 }};
+        color: {{ colors.3 }};
+    }
+
+    .apresentation-button:hover {
+        background-color: {{  colors.1 }};
+    }
+
+    .data-post {
+        background-color: {{ colors.0 }};
+        color: {{ colors.3 }};
+    }
+
+    .title-post {
+        color: {{ colors.0 }};
+    }
+
+    .title-livro {
+        color: {{ colors.0 }};
+    }
+</style>
+
 <body>
     <div id="title-site" class="container">
         <br>
@@ -29,7 +118,7 @@
                 <img height="130px" src="https://pulvissolaris.files.wordpress.com/2021/01/cropped-triskelion.png">
             </div>
             <div class="col-sm-10">
-                <h1 style="color: #87ad93">
+                <h1>
                     {{ config.0 }}<br>
                     <small>{{ config.1 }}</small>
                 </h1>
@@ -195,6 +284,72 @@
     <div class="container-fluid footer">
         <p>© {{ config.0 }}, {{ config.2 }}. Feito por {{ config.3 }}.</p>
     </div>
+
+<script>
+    let icon_post = 189.375;
+
+    $(".content-post").css("height", icon_post);
+
+    $(".post").hover(function () {
+        let id = $(this).attr("id");
+    
+        let icon = "#" + id + "-icon";
+        let title = "#" + id + "-title";
+        let text = "#" + id + "-text";
+
+        $(icon).css({"filter": "contrast(145%) brightness(100%)"});
+        $(title).css({"font-weight": "lighter", "color": "{{ colors.1 }}"});
+        $(text).css({"font-weight": "lighter", "color": "rgb(100, 100, 100)"});
+    }, function () {
+        let id = $(this).attr("id");
+    
+        let icon = "#" + id + "-icon";
+        let title = "#" + id + "-title";
+        let text = "#" + id + "-text";
+
+        $(icon).css({"filter": "contrast(100%) brightness(65%)"});
+        $(title).css({"font-weight": "", "color": "{{ colors.0 }}"});
+        $(text).css({"font-weight": "", "color": "rgb(151, 151, 151)"});
+    });
+
+    $(".post").click(function () {
+        let id = $(this).attr("id");
+
+        window.location.href = "/posts/" + id;
+    });
+
+    $(".livro").click(function () {
+        let id = $(this).attr("id");
+
+        window.open("/livros/" + id, "_blank");
+    })
+
+    $(".livro").hover(function () {
+        let id = $(this).attr("id");
+    
+        let icon = "#" + id + "-livro-icon";
+        let title = "#" + id + "-livro-title";
+        let autor = "#" + id + "-livro-autor";
+        let text = "#" + id + "-livro-text";
+
+        $(icon).css({"filter": "grayscale(30%) contrast(125%) brightness(100%)"});
+        $(title).css({"font-weight": "lighter", "color": "{{ colors.1 }}"});
+        $(autor).css({"font-weight": "lighter", "color": "{{ colors.1 }}"});
+        $(text).css({"font-weight": "lighter", "color": "rgb(100, 100, 100)"});
+    }, function () {
+        let id = $(this).attr("id");
+    
+        let icon = "#" + id + "-livro-icon";
+        let title = "#" + id + "-livro-title";
+        let autor = "#" + id + "-livro-autor";
+        let text = "#" + id + "-livro-text";
+
+        $(icon).css({"filter": "grayscale(0%) contrast(100%) brightness(65%)"});
+        $(title).css({"font-weight": "", "color": "{{ colors.0 }}"});
+        $(autor).css({"font-weight": "", "color": "{{ colors.0 }}"});
+        $(text).css({"font-weight": "", "color": "rgb(151, 151, 151)"});
+    });
+</script>
 
 </body>
 
