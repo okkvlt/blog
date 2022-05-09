@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <title>{{ config.0 }} — {{ config.1 }}</title>
-    <link rel="icon" href="https://pulvissolaris.files.wordpress.com/2021/01/cropped-triskelion.png" />
+    <link rel="icon" href="{% if config.4 %} {{ config.4.url }} {% endif %}" />
 
     <!--BOOTSTRAP n' JQUERY-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
