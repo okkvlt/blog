@@ -104,8 +104,8 @@ $("#scrolltop").click(function () {
 });
 
 $(".submenu .item").click(function () {
-    let pid = $(this).attr("id");
-    window.location.href = "/posts/category_" + pid;
+    let categoria = $(this).attr("id");
+    window.location.href = "/posts/categoria/" + categoria + "/";
 });
 
 $(".apresentation-button").click(function () {
