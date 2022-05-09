@@ -60,6 +60,7 @@ class Config(models.Model):
     status = models.CharField("Status do Blog", max_length=100, null=False, default="[Status do Blog]")
     owner = models.CharField("Dono do Blog", max_length=100, null=False, default="[Dono do Blog]")
     year = models.IntegerField("Publicação", null=False, default="0000")
+    logo = models.ImageField("Logo do Blog", null=True)
 
     class Meta:
         db_table = "configs"

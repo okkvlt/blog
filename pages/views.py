@@ -15,14 +15,15 @@ def index(request):
             db_config.name,
             db_config.status,
             db_config.year,
-            db_config.owner
+            db_config.owner,
+            db_config.logo
         ]
     except:
         config = [
             "[Nome do Blog]",
             "[Status do Blog]",
             "[Ano do Blog]",
-            "[Dono do Blog]"
+            "[Dono do Blog]",
         ]
 
     apresentacao = []

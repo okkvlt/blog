@@ -5,7 +5,7 @@ from sympy import Li
 from .models import *
 
 class ConfigList(admin.ModelAdmin):
-    list_display = ("id", "name", "status", "owner", "year")
+    list_display = ("id", "name", "status", "owner", "year", "logo")
     
 class ColorsList(admin.ModelAdmin):
     list_display = ("main", "strong", "neutral", "lighter")
