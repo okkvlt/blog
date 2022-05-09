@@ -43,9 +43,10 @@ class Posts(models.Model):
 
 
 class Livros(models.Model):
-    title = models.CharField("Título", max_length=100)
-    author = models.CharField("Autor", max_length=100)
+    title = models.CharField("Título", max_length=100, null=False)
+    author = models.CharField("Autor", max_length=100, null=False)
     banner = models.ImageField("Banner", null=False)
+    descricao = models.TextField("Descrição", null=False)
 
     class Meta:
         db_table = "livros"

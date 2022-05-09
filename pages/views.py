@@ -57,6 +57,24 @@ def index(request):
     except:
         pass
 
+    livros = []
+
+    try:
+        db_livros = Livros.objects.order_by("-id")[0:3]
+
+        for livro in db_livros:
+            livros.append(
+                [
+                    livro.id,
+                    livro.title,
+                    livro.author,
+                    livro.banner,
+                    livro.descricao
+                ]
+            )
+    except:
+        pass
+
     archive = utils.get_archive(Posts)
 
     site = {
@@ -64,6 +82,7 @@ def index(request):
         "posts": posts,
         "apresentacao": apresentacao,
         "archive": archive,
+        "livros": livros,
     }
 
     return render(request, "index.html", site)

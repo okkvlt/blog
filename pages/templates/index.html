@@ -134,49 +134,27 @@
                 <br>
                 {% endfor %}
 
+                {% if livros %}
                 <h2 style="margin-top: 10px">Últimos Livros</h2>
                 <br>
+                {% endif %}
                 <div class="row">
+                    {% for id, title, author, banner, descricao in livros %}
                     <div class="col-sm-4">
-                        <div id="1" class="thumbnail livro">
-                            <div id="1-livro-icon"
-                                style="background-image: url('https://brimfallow.files.wordpress.com/2012/09/plotinus_seeking_the_divine_tao.jpg');"
+                        <div id="{{ id }}" class="thumbnail livro">
+                            <div id="{{ id }}-livro-icon"
+                                style="background-image: url('{{ banner.url }}');"
                                 class="icon-livro"></div>
                             <div class="caption">
-                                <h4 id="1-livro-title" class="title-livro">Livro: <small>Enéadas II</small></h4>
-                                <h4 id="1-livro-autor" class="title-livro">Autor: <small>Plotino</small></h4>
-                                <p id="1-livro-text" class="text-livro">Lorem ipsum donec id elit non mi porta gravida
-                                    at eget metus.</p>
+                                <h4 id="{{ id }}-livro-title" class="title-livro">Livro: <small>{{ title }}</small></h4>
+                                <h4 id="{{ id }}-livro-autor" class="title-livro">Autor: <small>{{ author }}</small></h4>
+                                <p id="{{ id }}-livro-text" class="text-livro">
+                                    {{ descricao }}
+                                </p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-4">
-                        <div id="2" class="thumbnail livro">
-                            <div id="2-livro-icon"
-                                style="background-image: url('https://www.artbible.info/images/medium/ribera_petrus.jpg');"
-                                class="icon-livro"></div>
-                            <div class="caption">
-                                <h4 id="2-livro-title" class="title-livro">Livro: <small>Parmênides</small></h4>
-                                <h4 id="2-livro-autor" class="title-livro">Autor: <small>Platão</small></h4>
-                                <p id="2-livro-text" class="text-livro">Lorem ipsum donec id elit non mi porta gravida
-                                    at eget metus.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div id="3" class="thumbnail livro">
-                            <div id="3-livro-icon"
-                                style="background-image: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db4d63ef-a8bd-4d8a-b9e3-21414aae7030/db8321r-c28af176-e8a3-4857-891e-3062b88de54f.jpg/v1/fill/w_1280,h_1809,q_75,strp/friedrich_wilhelm_joseph_von_schelling_by_mitchellnolte_db8321r-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTgwOSIsInBhdGgiOiJcL2ZcL2RiNGQ2M2VmLWE4YmQtNGQ4YS1iOWUzLTIxNDE0YWFlNzAzMFwvZGI4MzIxci1jMjhhZjE3Ni1lOGEzLTQ4NTctODkxZS0zMDYyYjg4ZGU1NGYuanBnIiwid2lkdGgiOiI8PTEyODAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.HzxOOc2JhVWIaWDxN4SlCRHtlSYbw2tUYa1ka27t90E');"
-                                class="icon-livro"></div>
-                            <div class="caption">
-                                <h4 id="3-livro-title" class="title-livro">Livro: <small>Filosofia da Arte</small></h4>
-                                <h4 id="3-livro-autor" class="title-livro">Autor: <small>Schelling</small></h4>
-                                <p id="3-livro-text" class="text-livro">Lorem ipsum donec id elit non mi porta gravida
-                                    at eget metus. Lorem ipsum donec id elit non mi porta gravida at eget metus. Lorem
-                                    ipsum donec id elit non mi porta gravida at eget metus.</p>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
 
@@ -196,7 +174,8 @@
                             <ul style="margin-top: 5px;">
                                 {% for month, info in data.1.items %}
                                 <li style="padding: 2px;">
-                                    <a href="posts/{{ year }}/{{ month }}/">{{ info.0 }} <span class="badge">{{ info.1 }}</span></a>
+                                    <a href="posts/{{ year }}/{{ month }}/">{{ info.0 }} <span class="badge">{{ info.1
+                                            }}</span></a>
                                     <br>
                                 </li>
                                 {% endfor %}

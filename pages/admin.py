@@ -5,19 +5,19 @@ from sympy import Li
 from .models import *
 
 class ConfigList(admin.ModelAdmin):
-    list_display = ("name", "status", "owner", "year", "color")
+    list_display = ("id", "name", "status", "owner", "year", "color")
     
 class ApresentationList(admin.ModelAdmin):
-    list_display = ("title", "text", "background")
+    list_display = ("id", "title", "text", "background")
 
 class CategoryList(admin.ModelAdmin):
-    list_display = ("nome", "descricao")
+    list_display = ("id", "nome", "descricao")
 
 class PostsList(admin.ModelAdmin):
-    list_display = ("title", "author", "date", "banner")
+    list_display = ("id", "title", "author", "date", "banner")
     
 class LivrosList(admin.ModelAdmin):
-    list_display = ("title", "author")
+    list_display = ("id", "title", "author", "descricao", "banner")
 
 admin.site.register(Config, ConfigList)
 admin.site.register(Apresentacao, ApresentationList)
