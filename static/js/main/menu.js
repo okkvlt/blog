@@ -43,3 +43,15 @@ export function drop_menu() {
 
     $("#title-site").css("display", "block");
 }
+
+export function logo_hover() {
+    $("#site-logo").css({
+        "filter": "contrast(125%) grayscale(15%) brightness(105%)"
+    })
+}
+
+export function logo_dishover() {
+    $("#site-logo").css({
+        "filter": "contrast(100%) grayscale(0%) brightness(100%)"
+    })
+}
