@@ -37,12 +37,13 @@ def get_archive(Posts):
         archive[c] = [n, {}]
 
         for post in posts_in_year:
-            month = months_translate[post.date.month]
+            month = post.date.month
+            translated_month = months_translate[month]
 
             if month in archive[c][1].keys():
-                archive[c][1][month] += 1
+                archive[c][1][month][1] += 1
             else:
-                archive[c][1][month] = 1
+                archive[c][1][month] = [translated_month, 1]
 
         c -= 1
 
