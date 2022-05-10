@@ -203,8 +203,11 @@
                     <br>
                 </div>
 
-                {% if posts %}
                 <h2>Últimas Postagens</h2>
+                {% if posts %}
+                <br>
+                {% else %}
+                <p class="text-post">Nenhum post até o momento!</p>
                 <br>
                 {% endif %}
                 {% for id, title, text, image, date, author in posts %}
@@ -227,8 +230,11 @@
                 <br>
                 {% endfor %}
 
-                {% if livros %}
                 <h2 style="margin-top: 10px">Últimos Livros</h2>
+                {% if livros %}
+                <br>
+                {% else %}
+                <p class="text-post">Nenhum livro até o momento!</p>
                 <br>
                 {% endif %}
                 <div class="row">
