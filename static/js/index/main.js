@@ -111,3 +111,9 @@ $(".submenu .item").click(function () {
 $(".apresentation-button").click(function () {
     window.location.href = "/sobre";
 });
+
+if ($(document).height() <= $(window).height()) {
+    $(".footer").css({
+        "position": "fixed"
+    });
+}
