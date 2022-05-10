@@ -82,7 +82,22 @@ h4 {
     border-radius: 5px;
 }
 
+.secundary-widgets {
+    padding-top: 10px;
+    padding-bottom: 0px;
+    border-radius: 5px;
+}
+
+.secundary-widgets ul{
+    list-style: none;
+}
+
 .index-widgets a {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 15px;
+}
+
+.secundary-widgets a {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 15px;
 }
