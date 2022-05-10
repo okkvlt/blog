@@ -48,11 +48,14 @@ def posts(request):
 
 
 def traducoes(request):
+    livros = Utils.get_books()
+    
     traducoes = {
         "config": config,
         "archive": archive,
         "colors": colors,
         "categorias": categorias,
+        "livros": livros,
     }
 
     return render(request, "traducoes.html", traducoes)
