@@ -2,115 +2,25 @@
 from django.shortcuts import render
 
 from pages.models import *
-from pages.utils import utils
+from pages.utils.utils import Utils
 
 # Create your views here.
 
 
+Utils = Utils()
+
+config = Utils.get_config()
+archive = Utils.get_archives()
+colors = Utils.get_colors()
+categorias = Utils.get_categorys()
+
+
 def index(request):
-    try:
-        db_config = Config.objects.order_by("-id")[0]
+    posts = Utils.get_posts(3)
+    apresentacao = Utils.get_apresentation()
+    livros = Utils.get_books(3)
 
-        config = [
-            db_config.name,
-            db_config.status,
-            db_config.year,
-            db_config.owner,
-            db_config.logo
-        ]
-    except:
-        config = [
-            "[Nome do Blog]",
-            "[Status do Blog]",
-            "[Ano do Blog]",
-            "[Dono do Blog]",
-        ]
-
-    apresentacao = []
-
-    try:
-        db_apresentacao = Apresentacao.objects.order_by("-id")[0]
-
-        apresentacao = [
-            db_apresentacao.title,
-            db_apresentacao.text,
-            db_apresentacao.background
-        ]
-    except:
-        pass
-
-    posts = []
-
-    try:
-        db_posts = Posts.objects.order_by("-id")[0:3]
-
-        for post in db_posts:
-            posts.append(
-                [
-                    post.id,
-                    post.title,
-                    post.text,
-                    post.banner,
-                    post.date,
-                    post.author.first_name
-                ]
-            )
-    except:
-        pass
-
-    livros = []
-
-    try:
-        db_livros = Livros.objects.order_by("-id")[0:3]
-
-        for livro in db_livros:
-            livros.append(
-                [
-                    livro.id,
-                    livro.title,
-                    livro.author,
-                    livro.banner,
-                    livro.descricao
-                ]
-            )
-    except:
-        pass
-
-    archive = utils.get_archive(Posts)
-
-    try:
-        db_colors = Colors.objects.order_by("-id")[0]
-
-        colors = [
-            db_colors.main,
-            db_colors.strong,
-            db_colors.neutral,
-            db_colors.lighter
-        ]
-    except:
-        colors = [
-            "#87ad93",
-            "#526e5b",
-            "#cccccc",
-            "#e6f8ec"
-        ]
-        
-    categorias = []
-
-    try:
-        db_categorias = Categorias.objects.order_by("-id")
-
-        for categoria in db_categorias:
-            categorias.append(
-                [
-                    categoria.id,
-                    categoria.nome
-                ]
-            )
-    except:
-        pass
-
-    site = {
+    index = {
         "config": config,
         "posts": posts,
         "apresentacao": apresentacao,
@@ -120,4 +30,29 @@ def index(request):
         "categorias": categorias,
     }
 
-    return render(request, "index.html", site)
+    return render(request, "index.html", index)
+
+
+def posts(request):
+    posts = Utils.get_posts()
+
+    posts = {
+        "config": config,
+        "archive": archive,
+        "colors": colors,
+        "categorias": categorias,
+        "posts": posts,
+    }
+
+    return render(request, "posts.html", posts)
+
+
+def traducoes(request):
+    traducoes = {
+        "config": config,
+        "archive": archive,
+        "colors": colors,
+        "categorias": categorias,
+    }
+
+    return render(request, "traducoes.html", traducoes)

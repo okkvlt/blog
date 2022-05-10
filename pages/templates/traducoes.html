@@ -87,15 +87,6 @@
         color: {{  colors.1 }};
     }
 
-    .apresentation-button {
-        background-color: {{ colors.0 }};
-        color: {{ colors.3 }};
-    }
-
-    .apresentation-button:hover {
-        background-color: {{  colors.1 }};
-    }
-
     .data-post {
         background-color: {{ colors.0 }};
         color: {{ colors.3 }};
@@ -105,9 +96,6 @@
         color: {{ colors.0 }};
     }
 
-    .title-livro {
-        color: {{ colors.0 }};
-    }
 </style>
 
 <body>
@@ -130,7 +118,7 @@
         <div id="nav-container" class="container">
 
             <ul class="nav navbar-nav">
-                <li class="nav-item active text-center"><a href="/"><strong>Home</strong></a></li>
+                <li class="nav-item text-center"><a href="/"><strong>Home</strong></a></li>
                 <li class="nav-item submenu-hover text-center">
                     <a href="/posts">
                         <strong>Posts</strong>
@@ -146,7 +134,7 @@
                     </div>
                     {% endif %}
                 </li>
-                <li class="nav-item text-center"><a href="/traducoes"><strong>Traduções</strong></a></li>
+                <li class="nav-item active text-center"><a href="/traducoes"><strong>Traduções</strong></a></li>
                 <li class="nav-item text-center"><a href="/sobre"><strong>Sobre</strong></a></li>
             </ul>
 
@@ -165,71 +153,12 @@
         <div class="row">
 
             <div id="left-content" class="col-lg-9">
-                <h2>Pagina Inicial</h2>
-                <br>
-                <div class="index-main jumbotron apresentation"
-                    style="background-image: url('{% if apresentacao %} {{ apresentacao.2.url }} {% else %} images/romantic.jpg {% endif %}');">
-                    <h1 style="font-size: 40px; color: white" class="apresentation-title">
-                        {% if apresentacao %}
-                        {{ apresentacao.0 }}
-                        {% else %}
-                        [Título da Apresentação]
-                        {% endif %}
-                    </h1>
-                    <p style="font-size: 16px" class="apresentation-text">
-                        {% if apresentacao %}
-                        {{ apresentacao.1 }}
-                        {% else %}
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac nunc quis eros aliquet posuere
-                        eget
-                        vel enim. Morbi nec sem massa. Aliquam eget ante malesuada, elementum magna vitae, ornare metus.
-                        Ut
-                        congue aliquam sagittis. Suspendisse dignissim metus felis, sit amet vestibulum tellus placerat
-                        vitae.
-                        Maecenas vitae mi a diam porta fermentum. Morbi vel hendrerit velit. Quisque mattis nunc dui,
-                        convallis
-                        pharetra diam tristique tristique. Etiam ut lectus rutrum, vehicula massa et, sodales velit.
-                        Quisque
-                        ac ornare lorem. Nullam posuere nec neque id bibendum. Mauris ac imperdiet felis. Vivamus
-                        tincidunt
-                        sollicitudin metus id eleifend. Vestibulum nec felis commodo, tincidunt eros ac, suscipit orci.
-                        Praesent
-                        mollis lacus et nunc egestas varius. Morbi quis metus ultrices, varius ex quis, eleifend felis."
-                        {% endif %}
-                    </p>
-                    <center>
-                        <button class="apresentation-button">Saiba Mais</button>
-                    </center>
-                    <br>
-                </div>
-
-                {% if posts %}
-                <h2>Últimas Postagens</h2>
-                <br>
-                {% endif %}
-                {% for id, title, text, image, date, author in posts %}
-                <div id="{{ id }}" class="row post">
-                    <div class="col-sm-3">
-                        <div id="{{ id }}-icon" style="background-image: url('{{ image.url }}');" class="icon-post">
-                        </div>
-                    </div>
-                    <div class="col-sm-9 content-post insert-br-xs">
-                        <div class="data-post">{{ date|date:'d/m/y' }}</div>
-                        <h2 id="{{ id }}-title" class="title-post">{{ title }}</h2>
-                        <div id="{{ id }}-text" class="text-post">
-                            {{ text }}
-                        </div>
-                        <div class="author-post">
-                            Autor: {{ author }}
-                        </div>
-                    </div>
-                </div>
-                <br>
-                {% endfor %}
-
-                {% if livros %}
+                
                 <h2 style="margin-top: 10px">Últimos Livros</h2>
+                {% if livros %}
                 <br>
+                {% else %}
+                <p class="text-post">Nenhum livro até o momento!</p>
                 {% endif %}
                 <div class="row">
                     {% for id, title, author, banner, descricao in livros %}
