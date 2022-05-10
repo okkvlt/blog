@@ -253,7 +253,10 @@
 
             <div id="right-content" class="insert-br-md col-lg-3">
                 <div class="container-fluid index-widgets">
-                    <input id="search-input" type="text" class="text-center" placeholder="Pesquisar..." name="q">
+                    <form method="GET" action="posts/search">
+                        <input id="search-input" type="text" class="text-center" placeholder="Pesquisar..." name="q">
+                        <input type="submit" style="display:none;" />
+                    </form>
                 </div>
                 <br>
 
