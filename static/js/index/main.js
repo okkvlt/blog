@@ -115,9 +115,3 @@ $(".submenu .item").click(function () {
 $(".apresentation-button").click(function () {
     window.location.href = "/sobre";
 });
-
-$("#site-logo").hover(logo_hover, logo_dishover);
-
-$("#site-logo").click(function () {
-    window.location.href = "/";
-});
