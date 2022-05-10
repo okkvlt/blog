@@ -71,6 +71,19 @@
         color: {{ colors.3 }};
     }
 
+    .secundary-widgets {
+        border: {{ colors.0 }} solid 1px;
+        color: {{ colors.0 }};
+    }
+
+    .secundary-widgets h4 {
+        color: {{ colors.0 }};
+    }
+
+    .secundary-widgets a {
+        color: {{ colors.0 }};
+    }
+
     .index-main {
         background-color: {{ colors.0 }};
     }
@@ -167,7 +180,7 @@
                             <div id="{{ id }}-livro-icon" style="background-image: url('{{ banner.url }}');"
                                 class="icon-livro"></div>
                             <div class="caption">
-                                <h4 id="{{ id }}-livro-title" class="title-livro">Livro: <small>{{ title }}</small></h4>
+                                <h4 id="{{ id }}-livro-title" class="title-livro" style="-webkit-line-clamp: 2;">Livro: <small>{{ title }}</small></h4>
                                 <h4 id="{{ id }}-livro-autor" class="title-livro">Autor: <small>{{ author }}</small>
                                 </h4>
                                 <p id="{{ id }}-livro-text" class="text-livro">
@@ -207,6 +220,24 @@
                                 {% endfor %}
                             </ul>
                         </li><br>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <br>
+                {% endif %}
+
+                {% if livros %}
+                <div class="container-fluid secundary-widgets">
+                    <h4 class="text-center">Traduções</h4>
+                    <br>
+                    <ul class="list-group list-group-flush" style="margin-top: -10px;">
+                        {% for id, title, author, banner, descricao in livros %}
+                        <li class="list-group-item">
+                            <a href="livros/{{ id }}/">
+                                {{ title }}
+                            </a>
+                            <small style="font-style: italic">({{ author }})</small>
+                        </li>
                         {% endfor %}
                     </ul>
                 </div>

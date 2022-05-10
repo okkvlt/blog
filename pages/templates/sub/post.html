@@ -105,10 +105,6 @@
         color: {{ colors.3 }};
     }
 
-    .title-post {
-        color: {{ colors.0 }};
-    }
-
 </style>
 
 <body>
@@ -166,31 +162,21 @@
         <div class="row">
 
             <div id="left-content" class="col-lg-9">
-                <h2>Últimas Postagens</h2>
-                {% if posts %}
+                {% if post %}
+                <h2>{{ post.0 }}</h2>
+                <div style="float: left; width: 144px;" class="data-post">{{ post.3 }}</div>
+                <div style="float: left; width: 144px; position: relative; margin-left: 10px" class="author-post">{{ post.2|date:'d/m/y' }}</div>
+                <div style="float: left; width: 144px; position: relative; margin-left: 10px" class="author-post">{{ post.4 }}</div>
+                <br><br>
+                <center>
+                    <img style="border-radius: 10px; width: 100%" src="{{ post.5.url }}">
+                </center>
                 <br>
+                <p class="sobre">{{ post.1 }}</p>
                 {% else %}
-                <p class="text-post">Nenhum post até o momento!</p>
-                {% endif %}
-                {% for id, title, text, image, date, author in posts %}
-                <div id="{{ id }}" class="row post">
-                    <div class="col-sm-3">
-                        <div id="{{ id }}-icon" style="background-image: url('{{ image.url }}');" class="icon-post">
-                        </div>
-                    </div>
-                    <div class="col-sm-9 content-post insert-br-xs">
-                        <div class="data-post">{{ date|date:'d/m/y' }}</div>
-                        <h2 id="{{ id }}-title" class="title-post">{{ title }}</h2>
-                        <div id="{{ id }}-text" class="text-post">
-                            {{ text }}
-                        </div>
-                        <div class="author-post">
-                            Autor: {{ author }}
-                        </div>
-                    </div>
-                </div>
+                <h2>Post não encontrado!</h2>
                 <br>
-                {% endfor %}
+                {% endif %}
 
             </div>
 
@@ -252,40 +238,6 @@
     <div class="container-fluid footer">
         <p>© {{ config.0 }}, {{ config.2 }}. Feito por {{ config.3 }}.</p>
     </div>
-
-<script>
-    let icon_post = 189.375;
-
-    $(".content-post").css("height", icon_post);
-
-    $(".post").hover(function () {
-        let id = $(this).attr("id");
-    
-        let icon = "#" + id + "-icon";
-        let title = "#" + id + "-title";
-        let text = "#" + id + "-text";
-
-        $(icon).css({"filter": "contrast(145%) brightness(100%)"});
-        $(title).css({"font-weight": "lighter", "color": "{{ colors.1 }}"});
-        $(text).css({"font-weight": "lighter", "color": "rgb(100, 100, 100)"});
-    }, function () {
-        let id = $(this).attr("id");
-    
-        let icon = "#" + id + "-icon";
-        let title = "#" + id + "-title";
-        let text = "#" + id + "-text";
-
-        $(icon).css({"filter": "contrast(100%) brightness(65%)"});
-        $(title).css({"font-weight": "", "color": "{{ colors.0 }}"});
-        $(text).css({"font-weight": "", "color": "rgb(151, 151, 151)"});
-    });
-
-    $(".post").click(function () {
-        let id = $(this).attr("id");
-
-        window.location.href = "/posts/" + id;
-    });
-</script>
 
 </body>
 

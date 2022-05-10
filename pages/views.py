@@ -1,5 +1,6 @@
 
 from django.shortcuts import render
+from django.http import HttpResponse
 
 from pages.models import *
 from pages.utils.utils import Utils
@@ -13,6 +14,7 @@ config = Utils.get_config()
 archive = Utils.get_archives()
 colors = Utils.get_colors()
 categorias = Utils.get_categorys()
+livros = Utils.get_books()
 
 
 def index(request):
@@ -28,6 +30,7 @@ def index(request):
         "livros": livros,
         "colors": colors,
         "categorias": categorias,
+        "livros": livros,
     }
 
     return render(request, "index.html", index)
@@ -41,6 +44,7 @@ def posts(request):
         "archive": archive,
         "colors": colors,
         "categorias": categorias,
+        "livros": livros,
         "posts": posts,
     }
 
@@ -48,8 +52,6 @@ def posts(request):
 
 
 def traducoes(request):
-    livros = Utils.get_books()
-    
     traducoes = {
         "config": config,
         "archive": archive,
@@ -63,14 +65,29 @@ def traducoes(request):
 
 def sobre(request):
     about = Utils.get_about()
-    
+
     sobre = {
         "config": config,
         "archive": archive,
         "colors": colors,
         "categorias": categorias,
+        "livros": livros,
         "about": about,
     }
 
     return render(request, "sobre.html", sobre)
-    
+
+
+def pid(request, pid):
+    post = Utils.get_post_byid(pid)
+
+    post = {
+        "config": config,
+        "archive": archive,
+        "colors": colors,
+        "categorias": categorias,
+        "livros": livros,
+        "post": post,
+    }
+
+    return render(request, "sub/post.html", post)

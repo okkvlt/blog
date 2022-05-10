@@ -188,3 +188,20 @@ class Utils:
             about = []
 
         return about
+
+    def get_post_byid(self, pid):
+        try:
+            db_post = Posts.objects.get(id=pid)
+
+            post = [
+                db_post.title,
+                db_post.text,
+                db_post.date,
+                db_post.categoria,
+                db_post.author.first_name,
+                db_post.banner
+            ]
+        except:
+            post = []
+
+        return post
