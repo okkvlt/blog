@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+{% load static %}
+
+<head>
+    <meta charset="utf-8">
+    <title>{{ config.0 }} — {{ config.1 }}</title>
+    <link rel="icon" href="{% if config.4 %} {{ config.4.url }} {% endif %}" />
+
+    <!--BOOTSTRAP n' JQUERY-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!--JS-->
+    <script type="module" src="{% static 'js/index/main.js' %}"></script>
+
+    <!--CSS-->
+    <link rel="stylesheet" href="{% static 'css/main/menu.css' %}">
+    <link rel="stylesheet" href="{% static 'css/index/index.css' %}">
+</head>
+
+<style>
+    #navbar {
+        background-color: #fff;
+    }
+
+    #navbar li a {
+        background-color: #fff;
+        color: {{ colors.2 }};
+    }
+
+    #navbar li a:hover {
+        border-bottom: {{ colors.0 }} solid 1px;
+        color: {{ colors.0 }};
+    }
+
+    #navbar li.active a {
+        border-bottom: {{  colors.1 }} solid 1px;
+        color: {{ colors.1 }};
+    }
+
+    #navbar .submenu {
+        background-color: #fff;
+    }
+
+    #navbar .submenu .item {
+        background-color: #fff;
+        color: {{ colors.2 }};
+    }
+
+    #navbar .submenu .item:hover {
+        background-color: {{ colors.3 }};
+        color: {{ colors.0 }};
+    }
+
+    .index-widgets {
+        background-color: {{ colors.0 }};
+    }
+
+    .index-widgets a {
+        color: {{ colors.3 }};
+    }
+
+    .index-widgets li {
+        color: {{ colors.3 }};
+    }
+
+    .index-widgets h4 {
+        color: {{ colors.3 }};
+    }
+
+    .index-main {
+        background-color: {{ colors.0 }};
+    }
+
+    .footer {
+        background-color: {{ colors.0 }};
+    }
+
+    .footer p {
+        color: {{ colors.3 }};
+    }
+
+    h1, h2, h3, h4 {
+        color: {{  colors.1 }};
+    }
+
+</style>
+
+<body>
+    <div id="title-site" class="container">
+        <br>
+        <div id="banner" class="row">
+            <div class="col-sm-2">
+                <img id="site-logo" height="130px" src="{% if config.4 %} {{ config.4.url }} {% endif %}", alt="[Logo do Site]">
+            </div>
+            <div class="col-sm-10">
+                <h1>
+                    {{ config.0 }}<br>
+                    <small>{{ config.1 }}</small>
+                </h1>
+            </div>
+        </div>
+    </div>
+
+    <nav id="navbar" class="navbar">
+        <div id="nav-container" class="container">
+
+            <ul class="nav navbar-nav">
+                <li class="nav-item text-center"><a href="/"><strong>Home</strong></a></li>
+                <li class="nav-item submenu-hover text-center">
+                    <a href="/posts">
+                        <strong>Posts</strong>
+                        {% if categorias %}
+                        <span class="caret"></span>
+                        {% endif %}
+                    </a>
+                    {% if categorias %}
+                    <div class="submenu">
+                        {% for id, categoria in categorias %}
+                        <button id="{{ id }}" class="item"><strong>{{ categoria }}</strong></button>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </li>
+                <li class="nav-item text-center"><a href="/traducoes"><strong>Traduções</strong></a></li>
+                <li class="nav-item active text-center"><a href="/sobre"><strong>Sobre</strong></a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li id="go-top" class="text-right">
+                    <a id="scrolltop">
+                        <span class="glyphicon glyphicon-chevron-up"></span>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+
+            <div id="left-content" class="col-lg-9">
+                {% if about %}
+                <h2>{{ about.0 }}</h2>
+                <p class="sobre">{{ about.1 }}</p>
+                {% else %}
+                <h2>Sobre</h2>
+                <p class="text-post">Nenhuma descrição nesta página!</p>
+                <br>
+                {% endif %}
+
+            </div>
+
+            <div id="right-content" class="insert-br-md col-lg-3">
+                <div class="container-fluid index-widgets">
+                    <form method="GET" action="/posts">
+                        <input id="search-input" type="text" class="text-center" placeholder="Pesquisar..." name="q">
+                        <input type="submit" style="display:none;" />
+                    </form>
+                </div>
+                <br>
+
+                {% if archive %}
+                <div class="container-fluid index-widgets">
+                    <h4 class="text-center">Arquivos</h4>
+                    <br>
+                    <ul style="margin-top: -10px;">
+                        {% for year, data in archive.items %}
+                        <li><a href="posts/{{ year }}/">{{ year }} <span class="badge">{{ data.0 }}</span></a><br>
+                            <ul style="margin-top: 5px;">
+                                {% for month, info in data.1.items %}
+                                <li style="padding: 2px;">
+                                    <a href="posts/{{ year }}/{{ month }}/">
+                                        {{ info.0 }} <span class="badge">{{ info.1 }}</span>
+                                    </a>
+                                    <br>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </li><br>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+
+    <br>
+    <div class="container-fluid footer">
+        <p>© {{ config.0 }}, {{ config.2 }}. Feito por {{ config.3 }}.</p>
+    </div>
+
+</body>
+
+</html>

@@ -4,6 +4,17 @@ from django.conf import settings
 # Create your models here.
 
 
+class Sobre(models.Model):
+    title = models.CharField("Título", max_length=100, null=False)
+    text = models.TextField("Texto", null=False)
+    
+    class Meta:
+        db_table = "sobre"
+    
+    def __str__(self):
+        return self.title
+
+
 class Apresentacao(models.Model):
     title = models.CharField("Título", max_length=100)
     text = models.TextField("Texto", null=False)

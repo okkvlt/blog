@@ -21,6 +21,9 @@ class PostsList(admin.ModelAdmin):
     
 class LivrosList(admin.ModelAdmin):
     list_display = ("id", "title", "author", "descricao", "banner")
+    
+class SobreList(admin.ModelAdmin):
+    list_display = ("id", "title", "text")
 
 admin.site.register(Config, ConfigList)
 admin.site.register(Apresentacao, ApresentationList)
@@ -28,3 +31,4 @@ admin.site.register(Colors, ColorsList)
 admin.site.register(Categorias, CategoryList)
 admin.site.register(Posts, PostsList)
 admin.site.register(Livros, LivrosList)
+admin.site.register(Sobre, SobreList)

@@ -59,3 +59,18 @@ def traducoes(request):
     }
 
     return render(request, "traducoes.html", traducoes)
+
+
+def sobre(request):
+    about = Utils.get_about()
+    
+    sobre = {
+        "config": config,
+        "archive": archive,
+        "colors": colors,
+        "categorias": categorias,
+        "about": about,
+    }
+
+    return render(request, "sobre.html", sobre)
+    

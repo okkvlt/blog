@@ -119,7 +119,8 @@ class Utils:
         c = last_year
 
         while c >= first_year:
-            posts_in_year = Posts.objects.filter(date__year=c).order_by("-date")
+            posts_in_year = Posts.objects.filter(
+                date__year=c).order_by("-date")
             n = len(posts_in_year)
 
             if n == 0:
@@ -174,3 +175,16 @@ class Utils:
             pass
 
         return apresentacao
+
+    def get_about(self):
+        try:
+            db_about = Sobre.objects.order_by("-id")[0]
+
+            about = [
+                db_about.title,
+                db_about.text,
+            ]
+        except:
+            about = []
+
+        return about
