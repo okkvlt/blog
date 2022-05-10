@@ -1,10 +1,6 @@
 import { insert_br_xs, delete_br_xs } from './functions.js';
 
-import {
-    open_submenu, close_submenu,
-    fix_menu, drop_menu,
-    logo_hover, logo_dishover
-} from '../main/menu.js';
+import { open_submenu, close_submenu, fix_menu, drop_menu } from '../main/menu.js';
 import { center_banner, drop_banner } from '../main/banner.js';
 import { insert_br_md, delete_br_md } from '../main/br.js';
 
