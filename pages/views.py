@@ -3,10 +3,10 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 from pages.models import *
-from pages.utils.utils import Utils
+#from pages.utils.utils import Utils
 
 # Create your views here.
-
+"""
 
 Utils = Utils()
 
@@ -91,3 +91,4 @@ def pid(request, pid):
     }
 
     return render(request, "sub/post.html", post)
+"""
