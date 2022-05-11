@@ -1,6 +1,6 @@
 from pages.models import *
 
-"""
+
 class Utils:
     def get_config(self):
         try:
@@ -205,4 +205,3 @@ class Utils:
             post = []
 
         return post
-"""
