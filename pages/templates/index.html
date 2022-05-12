@@ -220,7 +220,7 @@
                 <p class="text-post">Nenhum post até o momento!</p>
                 <br>
                 {% endif %}
-                {% for id, title, text, image, date, author in posts %}
+                {% for id, title, text, image, date, author, keys in posts %}
                 <div id="{{ id }}" class="row post">
                     <div class="col-sm-3">
                         <div id="{{ id }}-icon" style="background-image: url('{{ image.url }}');" class="icon-post">

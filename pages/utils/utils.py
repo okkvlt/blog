@@ -61,7 +61,8 @@ class Utils:
                         post.text,
                         post.banner,
                         post.date,
-                        post.author.first_name
+                        post.author.first_name,
+                        []
                     ]
                 )
         except:
@@ -234,7 +235,7 @@ class Utils:
             results = self.get_search(results, word, titles)
             results = self.get_search(results, word, texts)
 
-        for post in results:
+        for post in results.keys():
             posts.append(
                 [
                     post.id,
@@ -242,7 +243,8 @@ class Utils:
                     post.text,
                     post.banner,
                     post.date,
-                    post.author.first_name
+                    post.author.first_name,
+                    results[post]
                 ]
             )
 

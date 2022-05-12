@@ -57,6 +57,7 @@ def posts(request):
         return render(request, "posts.html", response)
 
     response["posts"] = Utils.search_for_posts(request.GET["q"])
+    response["query"] = request.GET["q"]
 
     return render(request, "posts.html", response)
 

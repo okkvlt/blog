@@ -167,12 +167,20 @@
 
             <div id="left-content" class="col-lg-9">
                 <h2>Últimas Postagens</h2>
+                {% if query %}
+                <div style="float: left; position: relative; width: 50%; text-align: left; background-color: transparent;" class="author-post">
+                    <strong>Busca:</strong> {{ query }}
+                </div>
+                <br>
+                {% endif %}
                 {% if posts %}
                 <br>
                 {% else %}
-                <p class="text-post">Nenhum post até o momento!</p>
+                <div style="float: left; position: relative; width: 50%; text-align: left; background-color: transparent;" class="author-post">
+                    Nenhum post até o momento!
+                </div>
                 {% endif %}
-                {% for id, title, text, image, date, author in posts %}
+                {% for id, title, text, image, date, author, keys in posts %}
                 <div id="{{ id }}" class="row post">
                     <div class="col-sm-3">
                         <div id="{{ id }}-icon" style="background-image: url('{{ image.url }}');" class="icon-post">
@@ -187,6 +195,14 @@
                         <div class="author-post">
                             Autor: {{ author }}
                         </div>
+                        {% if keys %}
+                        <div style="width: 71%; margin-left: 25%; background-color: transparent; text-align: left;" class="author-post">
+                            Encontrados: | 
+                            {% for key in keys %}
+                            {{ key }} | 
+                            {% endfor %}
+                        </div>
+                    {% endif %}
                     </div>
                 </div>
                 <br>
