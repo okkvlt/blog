@@ -1,5 +1,5 @@
-from unittest import result
 from pages.models import *
+import unidecode
 
 
 class Utils:
@@ -44,14 +44,27 @@ class Utils:
 
         return colors
 
-    def get_posts(self, num=0):
+    def get_posts(self, author=None, category=None, by="id", num=0):
+        """
+        by:
+            1 - id (all)
+            2 - author
+            3 - categoria
+        """
+
         posts = []
+
+        modes = {
+            "id": Posts.objects.order_by("-id"),
+            "author": Posts.objects.filter(author__username=author).order_by("-id"),
+            "category": Posts.objects.filter(categoria__nome__iexact=category).order_by("-id")
+        }
 
         try:
             if num == 0:
-                db_posts = Posts.objects.order_by("-id")
+                db_posts = modes[by]
             else:
-                db_posts = Posts.objects.order_by("-id")[0:num]
+                db_posts = modes[by][0:num]
 
             for post in db_posts:
                 posts.append(
@@ -155,7 +168,9 @@ class Utils:
                 categorias.append(
                     [
                         categoria.id,
-                        categoria.nome
+                        categoria.nome,
+                        unidecode.unidecode(
+                            str(categoria.nome).lower().replace(" ", "-"))
                     ]
                 )
         except:
@@ -202,7 +217,10 @@ class Utils:
                 db_post.date,
                 db_post.categoria,
                 db_post.author.first_name,
-                db_post.banner
+                db_post.banner,
+                db_post.author.username,
+                unidecode.unidecode(
+                    str(db_post.categoria).lower().replace(" ", "-"))
             ]
         except:
             post = []

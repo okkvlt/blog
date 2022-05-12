@@ -12,6 +12,9 @@ Utils = Utils()
 
 
 def index(request):
+    if request.method != "GET":
+        return HttpResponse("Método não permitido nesta página!")
+
     config = Utils.get_config()
     archive = Utils.get_archives()
     colors = Utils.get_colors()
@@ -37,6 +40,9 @@ def index(request):
 
 
 def posts(request):
+    if request.method != "GET":
+        return HttpResponse("Método não permitido nesta página!")
+
     config = Utils.get_config()
     archive = Utils.get_archives()
     colors = Utils.get_colors()
@@ -63,6 +69,9 @@ def posts(request):
 
 
 def traducoes(request):
+    if request.method != "GET":
+        return HttpResponse("Método não permitido nesta página!")
+
     config = Utils.get_config()
     archive = Utils.get_archives()
     colors = Utils.get_colors()
@@ -81,6 +90,9 @@ def traducoes(request):
 
 
 def sobre(request):
+    if request.method != "GET":
+        return HttpResponse("Método não permitido nesta página!")
+
     config = Utils.get_config()
     archive = Utils.get_archives()
     colors = Utils.get_colors()
@@ -102,6 +114,9 @@ def sobre(request):
 
 
 def pid(request, pid):
+    if request.method != "GET":
+        return HttpResponse("Método não permitido nesta página!")
+
     config = Utils.get_config()
     archive = Utils.get_archives()
     colors = Utils.get_colors()
@@ -120,3 +135,59 @@ def pid(request, pid):
     }
 
     return render(request, "sub/post.html", response)
+
+
+def year(request, year):
+    return HttpResponse(year)
+
+
+def month(request, year, month):
+    return HttpResponse(year)
+
+
+def day(request, year, month, day):
+    return HttpResponse(year)
+
+
+def category(request, category):
+    config = Utils.get_config()
+    archive = Utils.get_archives()
+    colors = Utils.get_colors()
+    categorias = Utils.get_categorys()
+    livros = Utils.get_books()
+
+    posts = Utils.get_posts(by="category", category=category)
+
+    response = {
+        "config": config,
+        "archive": archive,
+        "colors": colors,
+        "categorias": categorias,
+        "livros": livros,
+        "posts": posts,
+        "cat": category
+    }
+
+    return render(request, "posts.html", response)
+
+
+def author(request, author):
+    config = Utils.get_config()
+    archive = Utils.get_archives()
+    colors = Utils.get_colors()
+    categorias = Utils.get_categorys()
+    livros = Utils.get_books()
+
+    posts = Utils.get_posts(by="author", author=author)
+
+    response = {
+        "config": config,
+        "archive": archive,
+        "colors": colors,
+        "categorias": categorias,
+        "livros": livros,
+        "posts": posts,
+        "author": author
+    }
+
+    return render(request, "posts.html", response)

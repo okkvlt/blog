@@ -141,8 +141,10 @@
                     </a>
                     {% if categorias %}
                     <div class="submenu">
-                        {% for id, categoria in categorias %}
-                        <button id="{{ id }}" class="item"><strong>{{ categoria }}</strong></button>
+                        {% for id, categoria, normalized in categorias %}
+                        <a href="/posts/categoria/{{normalized}}">
+                            <button class="item"><strong>{{ categoria }}</strong></button>
+                        </a>
                         {% endfor %}
                     </div>
                     {% endif %}
@@ -173,6 +175,18 @@
                 </div>
                 <br>
                 {% endif %}
+                {% if cat %}
+                <div style="float: left; position: relative; width: 50%; text-align: left; background-color: transparent;" class="author-post">
+                    <strong>Categoria:</strong> {{ cat }}
+                </div>
+                <br>
+                {% endif %}
+                {% if author %}
+                <div style="float: left; position: relative; width: 50%; text-align: left; background-color: transparent;" class="author-post">
+                    <strong>Autor:</strong> {{ author }}
+                </div>
+                <br>
+                {% endif %}
                 {% if posts %}
                 <br>
                 {% else %}
@@ -181,30 +195,32 @@
                 </div>
                 {% endif %}
                 {% for id, title, text, image, date, author, keys in posts %}
-                <div id="{{ id }}" class="row post">
-                    <div class="col-sm-3">
-                        <div id="{{ id }}-icon" style="background-image: url('{{ image.url }}');" class="icon-post">
+                <a href="/posts/id/{{ id }}">
+                    <div id="{{ id }}" class="row post">
+                        <div class="col-sm-3">
+                            <div id="{{ id }}-icon" style="background-image: url('{{ image.url }}');" class="icon-post">
+                            </div>
+                        </div>
+                        <div class="col-sm-9 content-post insert-br-xs">
+                            <div class="data-post">{{ date|date:'d/m/y' }}</div>
+                            <h2 id="{{ id }}-title" class="title-post">{{ title }}</h2>
+                            <div id="{{ id }}-text" class="text-post">
+                                {{ text }}
+                            </div>
+                            <div class="author-post">
+                                Autor: {{ author }}
+                            </div>
+                            {% if keys %}
+                            <div style="width: 71%; margin-left: 25%; background-color: transparent; text-align: left;" class="author-post">
+                                Encontrados: | 
+                                {% for key in keys %}
+                                {{ key }} | 
+                                {% endfor %}
+                            </div>
+                        {% endif %}
                         </div>
                     </div>
-                    <div class="col-sm-9 content-post insert-br-xs">
-                        <div class="data-post">{{ date|date:'d/m/y' }}</div>
-                        <h2 id="{{ id }}-title" class="title-post">{{ title }}</h2>
-                        <div id="{{ id }}-text" class="text-post">
-                            {{ text }}
-                        </div>
-                        <div class="author-post">
-                            Autor: {{ author }}
-                        </div>
-                        {% if keys %}
-                        <div style="width: 71%; margin-left: 25%; background-color: transparent; text-align: left;" class="author-post">
-                            Encontrados: | 
-                            {% for key in keys %}
-                            {{ key }} | 
-                            {% endfor %}
-                        </div>
-                    {% endif %}
-                    </div>
-                </div>
+                </a>
                 <br>
                 {% endfor %}
 

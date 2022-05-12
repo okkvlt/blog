@@ -103,11 +103,6 @@ $("#scrolltop").click(function () {
     $("html, body").animate({ scrollTop: "0" });
 });
 
-$(".submenu .item").click(function () {
-    let categoria = $(this).attr("id");
-    window.location.href = "/posts/categoria/" + categoria + "/";
-});
-
 $(".apresentation-button").click(function () {
     window.location.href = "/sobre";
 });
@@ -121,16 +116,3 @@ if ($(document).height() <= $(window).height()) {
 let icon_post = 189.375;
 
 $(".content-post").css("height", icon_post);
-
-$(".post").click(function () {
-    let id = $(this).attr("id");
-
-    window.location.href = "/posts/" + id;
-});
-
-$(".livro").click(function () {
-    let id = $(this).attr("id");
-    let link = $("#"+id+"-file").html();
-
-    window.open(link, "_blank");
-})

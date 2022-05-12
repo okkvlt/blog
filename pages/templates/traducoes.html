@@ -141,8 +141,10 @@
                     </a>
                     {% if categorias %}
                     <div class="submenu">
-                        {% for id, categoria in categorias %}
-                        <button id="{{ id }}" class="item"><strong>{{ categoria }}</strong></button>
+                        {% for id, categoria, normalized in categorias %}
+                        <a href="/posts/categoria/{{normalized}}">
+                            <button class="item"><strong>{{ categoria }}</strong></button>
+                        </a>
                         {% endfor %}
                     </div>
                     {% endif %}
@@ -175,21 +177,22 @@
                 {% endif %}
                 <div class="row">
                     {% for id, title, author, banner, descricao, file in livros %}
-                    <div class="col-sm-4">
-                        <div id="{{ id }}" class="thumbnail livro">
-                            <div id="{{ id }}-livro-icon" style="background-image: url('{{ banner.url }}');"
-                                class="icon-livro"></div>
-                            <div class="caption">
-                                <h4 id="{{ id }}-livro-title" class="title-livro" style="-webkit-line-clamp: 2;">Livro: <small>{{ title }}</small></h4>
-                                <h4 id="{{ id }}-livro-autor" class="title-livro">Autor: <small>{{ author }}</small>
-                                </h4>
-                                <p id="{{ id }}-livro-text" class="text-livro">
-                                    {{ descricao }}
-                                </p>
-                                <p id="{{ id }}-file" style="display: none;">{{ file.url }}</p>
+                    <a href="{{ file.url }}">
+                        <div class="col-sm-4">
+                            <div id="{{ id }}" class="thumbnail livro">
+                                <div id="{{ id }}-livro-icon" style="background-image: url('{{ banner.url }}');"
+                                    class="icon-livro"></div>
+                                <div class="caption">
+                                    <h4 id="{{ id }}-livro-title" class="title-livro" style="-webkit-line-clamp: 2;">Livro: <small>{{ title }}</small></h4>
+                                    <h4 id="{{ id }}-livro-autor" class="title-livro">Autor: <small>{{ author }}</small>
+                                    </h4>
+                                    <p id="{{ id }}-livro-text" class="text-livro">
+                                        {{ descricao }}
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                     {% endfor %}
                 </div>
             </div>
