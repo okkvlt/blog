@@ -43,18 +43,22 @@ def posts(request):
     categorias = Utils.get_categorys()
     livros = Utils.get_books()
 
-    posts = Utils.get_posts()
-
-    posts = {
+    response = {
         "config": config,
         "archive": archive,
         "colors": colors,
         "categorias": categorias,
         "livros": livros,
-        "posts": posts,
     }
 
-    return render(request, "posts.html", posts)
+    if not "q" in request.GET:
+        response["posts"] = Utils.get_posts()
+
+        return render(request, "posts.html", response)
+
+    response["posts"] = Utils.search_for_posts(request.GET["q"])
+
+    return render(request, "posts.html", response)
 
 
 def traducoes(request):
@@ -64,7 +68,7 @@ def traducoes(request):
     categorias = Utils.get_categorys()
     livros = Utils.get_books()
 
-    traducoes = {
+    response = {
         "config": config,
         "archive": archive,
         "colors": colors,
@@ -72,7 +76,7 @@ def traducoes(request):
         "livros": livros,
     }
 
-    return render(request, "traducoes.html", traducoes)
+    return render(request, "traducoes.html", response)
 
 
 def sobre(request):
@@ -84,7 +88,7 @@ def sobre(request):
 
     about = Utils.get_about()
 
-    sobre = {
+    response = {
         "config": config,
         "archive": archive,
         "colors": colors,
@@ -93,7 +97,7 @@ def sobre(request):
         "about": about,
     }
 
-    return render(request, "sobre.html", sobre)
+    return render(request, "sobre.html", response)
 
 
 def pid(request, pid):
@@ -105,7 +109,7 @@ def pid(request, pid):
 
     post = Utils.get_post_byid(pid)
 
-    post = {
+    response = {
         "config": config,
         "archive": archive,
         "colors": colors,
@@ -114,4 +118,4 @@ def pid(request, pid):
         "post": post,
     }
 
-    return render(request, "sub/post.html", post)
+    return render(request, "sub/post.html", response)

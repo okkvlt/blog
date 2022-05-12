@@ -1,3 +1,4 @@
+from unittest import result
 from pages.models import *
 
 
@@ -206,3 +207,43 @@ class Utils:
             post = []
 
         return post
+
+    def get_search(self, results, word, mode):
+        for result in mode:
+            if result in results.keys():
+                if not word in results[result]:
+                    results[result].append(word)
+            else:
+                results[result] = [word]
+
+        return results
+
+    def search_for_posts(self, key):
+        words = key.split()
+
+        results = {}
+        posts = []
+
+        for word in words:
+            titles = Posts.objects.filter(title__contains=word).order_by("-id")
+            texts = Posts.objects.filter(text__contains=word).order_by("-id")
+
+            if titles.count() == 0 and texts.count == 0:
+                continue
+
+            results = self.get_search(results, word, titles)
+            results = self.get_search(results, word, texts)
+
+        for post in results:
+            posts.append(
+                [
+                    post.id,
+                    post.title,
+                    post.text,
+                    post.banner,
+                    post.date,
+                    post.author.first_name
+                ]
+            )
+
+        return posts
