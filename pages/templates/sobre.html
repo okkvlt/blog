@@ -206,9 +206,9 @@
                     <h4 class="text-center">Traduções</h4>
                     <br>
                     <ul class="list-group list-group-flush" style="margin-top: -10px;">
-                        {% for id, title, author, banner, descricao in livros %}
+                        {% for id, title, author, banner, descricao, file in livros %}
                         <li class="list-group-item">
-                            <a href="livros/{{ id }}/">
+                            <a href="{{ file.url }}" target="_blank">
                                 {{ title }}
                             </a>
                             <small style="font-style: italic">({{ author }})</small>

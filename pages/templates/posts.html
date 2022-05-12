@@ -232,9 +232,9 @@
                     <h4 class="text-center">Traduções</h4>
                     <br>
                     <ul class="list-group list-group-flush" style="margin-top: -10px;">
-                        {% for id, title, author, banner, descricao in livros %}
+                        {% for id, title, author, banner, descricao, file in livros %}
                         <li class="list-group-item">
-                            <a href="livros/{{ id }}/">
+                            <a href="{{ file.url }}" target="_blank">
                                 {{ title }}
                             </a>
                             <small style="font-style: italic">({{ author }})</small>
@@ -252,40 +252,6 @@
     <div class="container-fluid footer">
         <p>© {{ config.0 }}, {{ config.2 }}. Feito por {{ config.3 }}.</p>
     </div>
-
-<script>
-    let icon_post = 189.375;
-
-    $(".content-post").css("height", icon_post);
-
-    $(".post").hover(function () {
-        let id = $(this).attr("id");
-    
-        let icon = "#" + id + "-icon";
-        let title = "#" + id + "-title";
-        let text = "#" + id + "-text";
-
-        $(icon).css({"filter": "contrast(145%) brightness(100%)"});
-        $(title).css({"font-weight": "lighter", "color": "{{ colors.1 }}"});
-        $(text).css({"font-weight": "lighter", "color": "rgb(100, 100, 100)"});
-    }, function () {
-        let id = $(this).attr("id");
-    
-        let icon = "#" + id + "-icon";
-        let title = "#" + id + "-title";
-        let text = "#" + id + "-text";
-
-        $(icon).css({"filter": "contrast(100%) brightness(65%)"});
-        $(title).css({"font-weight": "", "color": "{{ colors.0 }}"});
-        $(text).css({"font-weight": "", "color": "rgb(151, 151, 151)"});
-    });
-
-    $(".post").click(function () {
-        let id = $(this).attr("id");
-
-        window.location.href = "/posts/" + id;
-    });
-</script>
 
 </body>
 

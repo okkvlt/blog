@@ -84,7 +84,8 @@ class Utils:
                         livro.title,
                         livro.author,
                         livro.banner,
-                        livro.descricao
+                        livro.descricao,
+                        livro.file,
                     ]
                 )
         except:

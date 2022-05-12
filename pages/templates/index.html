@@ -181,7 +181,7 @@
                 <h2>Pagina Inicial</h2>
                 <br>
                 <div class="index-main jumbotron apresentation"
-                    style="background-image: url('{% if apresentacao %} {{ apresentacao.2.url }} {% else %} images/romantic.jpg {% endif %}');">
+                    style="background-image: url('{% if apresentacao %} {{ apresentacao.2.url }} {% else %} {% endif %}');">
                     <h1 style="font-size: 40px; color: white" class="apresentation-title">
                         {% if apresentacao %}
                         {{ apresentacao.0 }}
@@ -251,7 +251,7 @@
                 <br>
                 {% endif %}
                 <div class="row">
-                    {% for id, title, author, banner, descricao in livros %}
+                    {% for id, title, author, banner, descricao, file in livros %}
                     <div class="col-sm-4">
                         <div id="{{ id }}" class="thumbnail livro">
                             <div id="{{ id }}-livro-icon" style="background-image: url('{{ banner.url }}');"
@@ -263,6 +263,7 @@
                                 <p id="{{ id }}-livro-text" class="text-livro">
                                     {{ descricao }}
                                 </p>
+                                <p id="{{ id }}-file" style="display: none;">{{ file.url }}</p>
                             </div>
                         </div>
                     </div>
@@ -308,9 +309,9 @@
                     <h4 class="text-center">Traduções</h4>
                     <br>
                     <ul class="list-group list-group-flush" style="margin-top: -10px;">
-                        {% for id, title, author, banner, descricao in livros %}
+                        {% for id, title, author, banner, descricao, file in livros %}
                         <li class="list-group-item">
-                            <a href="livros/{{ id }}/">
+                            <a href="{{ file.url }}" target="_blank">
                                 {{ title }}
                             </a>
                             <small style="font-style: italic">({{ author }})</small>
@@ -328,72 +329,6 @@
     <div class="container-fluid footer">
         <p>© {{ config.0 }}, {{ config.2 }}. Feito por {{ config.3 }}.</p>
     </div>
-
-<script>
-    let icon_post = 189.375;
-
-    $(".content-post").css("height", icon_post);
-
-    $(".post").hover(function () {
-        let id = $(this).attr("id");
-    
-        let icon = "#" + id + "-icon";
-        let title = "#" + id + "-title";
-        let text = "#" + id + "-text";
-
-        $(icon).css({"filter": "contrast(145%) brightness(100%)"});
-        $(title).css({"font-weight": "lighter", "color": "{{ colors.1 }}"});
-        $(text).css({"font-weight": "lighter", "color": "rgb(100, 100, 100)"});
-    }, function () {
-        let id = $(this).attr("id");
-    
-        let icon = "#" + id + "-icon";
-        let title = "#" + id + "-title";
-        let text = "#" + id + "-text";
-
-        $(icon).css({"filter": "contrast(100%) brightness(65%)"});
-        $(title).css({"font-weight": "", "color": "{{ colors.0 }}"});
-        $(text).css({"font-weight": "", "color": "rgb(151, 151, 151)"});
-    });
-
-    $(".post").click(function () {
-        let id = $(this).attr("id");
-
-        window.location.href = "/posts/" + id;
-    });
-
-    $(".livro").click(function () {
-        let id = $(this).attr("id");
-
-        window.open("/livros/" + id, "_blank");
-    })
-
-    $(".livro").hover(function () {
-        let id = $(this).attr("id");
-    
-        let icon = "#" + id + "-livro-icon";
-        let title = "#" + id + "-livro-title";
-        let autor = "#" + id + "-livro-autor";
-        let text = "#" + id + "-livro-text";
-
-        $(icon).css({"filter": "grayscale(30%) contrast(125%) brightness(100%)"});
-        $(title).css({"font-weight": "lighter", "color": "{{ colors.1 }}"});
-        $(autor).css({"font-weight": "lighter", "color": "{{ colors.1 }}"});
-        $(text).css({"font-weight": "lighter", "color": "rgb(100, 100, 100)"});
-    }, function () {
-        let id = $(this).attr("id");
-    
-        let icon = "#" + id + "-livro-icon";
-        let title = "#" + id + "-livro-title";
-        let autor = "#" + id + "-livro-autor";
-        let text = "#" + id + "-livro-text";
-
-        $(icon).css({"filter": "grayscale(0%) contrast(100%) brightness(65%)"});
-        $(title).css({"font-weight": "", "color": "{{ colors.0 }}"});
-        $(autor).css({"font-weight": "", "color": "{{ colors.0 }}"});
-        $(text).css({"font-weight": "", "color": "rgb(151, 151, 151)"});
-    });
-</script>
 
 </body>
 
