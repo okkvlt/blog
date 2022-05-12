@@ -76,9 +76,9 @@
     margin-left: 10px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 16px;
-    color: rgb(151, 151, 151);
     text-align: justify;
     transition: all 1s;
+    color: rgb(151, 151, 151);
 
     display: -webkit-box;
     -webkit-line-clamp: 4;
@@ -125,6 +125,7 @@
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 14px;
     color: rgb(151, 151, 151);
+    transition: all 1s;
 
     display: -webkit-box;
     -webkit-line-clamp: 2;

@@ -122,28 +122,6 @@ let icon_post = 189.375;
 
 $(".content-post").css("height", icon_post);
 
-$(".post").hover(function () {
-    let id = $(this).attr("id");
-
-    let icon = "#" + id + "-icon";
-    let title = "#" + id + "-title";
-    let text = "#" + id + "-text";
-
-    $(icon).css({"filter": "contrast(145%) brightness(100%)"});
-    $(title).css({"font-weight": "lighter", "color": "{{ colors.1 }}"});
-    $(text).css({"font-weight": "lighter", "color": "rgb(100, 100, 100)"});
-}, function () {
-    let id = $(this).attr("id");
-
-    let icon = "#" + id + "-icon";
-    let title = "#" + id + "-title";
-    let text = "#" + id + "-text";
-
-    $(icon).css({"filter": "contrast(100%) brightness(65%)"});
-    $(title).css({"font-weight": "", "color": "{{ colors.0 }}"});
-    $(text).css({"font-weight": "", "color": "rgb(151, 151, 151)"});
-});
-
 $(".post").click(function () {
     let id = $(this).attr("id");
 
@@ -156,29 +134,3 @@ $(".livro").click(function () {
 
     window.open(link, "_blank");
 })
-
-$(".livro").hover(function () {
-    let id = $(this).attr("id");
-
-    let icon = "#" + id + "-livro-icon";
-    let title = "#" + id + "-livro-title";
-    let autor = "#" + id + "-livro-autor";
-    let text = "#" + id + "-livro-text";
-
-    $(icon).css({"filter": "grayscale(30%) contrast(125%) brightness(100%)"});
-    $(title).css({"font-weight": "lighter", "color": "{{ colors.1 }}"});
-    $(autor).css({"font-weight": "lighter", "color": "{{ colors.1 }}"});
-    $(text).css({"font-weight": "lighter", "color": "rgb(100, 100, 100)"});
-}, function () {
-    let id = $(this).attr("id");
-
-    let icon = "#" + id + "-livro-icon";
-    let title = "#" + id + "-livro-title";
-    let autor = "#" + id + "-livro-autor";
-    let text = "#" + id + "-livro-text";
-
-    $(icon).css({"filter": "grayscale(0%) contrast(100%) brightness(65%)"});
-    $(title).css({"font-weight": "", "color": "{{ colors.0 }}"});
-    $(autor).css({"font-weight": "", "color": "{{ colors.0 }}"});
-    $(text).css({"font-weight": "", "color": "rgb(151, 151, 151)"});
-});

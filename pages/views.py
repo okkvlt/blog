@@ -10,14 +10,14 @@ from pages.utils.utils import Utils
 
 Utils = Utils()
 
-config = Utils.get_config()
-archive = Utils.get_archives()
-colors = Utils.get_colors()
-categorias = Utils.get_categorys()
-livros = Utils.get_books()
-
 
 def index(request):
+    config = Utils.get_config()
+    archive = Utils.get_archives()
+    colors = Utils.get_colors()
+    categorias = Utils.get_categorys()
+    livros = Utils.get_books()
+
     posts = Utils.get_posts(3)
     apresentacao = Utils.get_apresentation()
     livros = Utils.get_books(3)
@@ -37,6 +37,12 @@ def index(request):
 
 
 def posts(request):
+    config = Utils.get_config()
+    archive = Utils.get_archives()
+    colors = Utils.get_colors()
+    categorias = Utils.get_categorys()
+    livros = Utils.get_books()
+
     posts = Utils.get_posts()
 
     posts = {
@@ -52,6 +58,12 @@ def posts(request):
 
 
 def traducoes(request):
+    config = Utils.get_config()
+    archive = Utils.get_archives()
+    colors = Utils.get_colors()
+    categorias = Utils.get_categorys()
+    livros = Utils.get_books()
+
     traducoes = {
         "config": config,
         "archive": archive,
@@ -64,6 +76,12 @@ def traducoes(request):
 
 
 def sobre(request):
+    config = Utils.get_config()
+    archive = Utils.get_archives()
+    colors = Utils.get_colors()
+    categorias = Utils.get_categorys()
+    livros = Utils.get_books()
+
     about = Utils.get_about()
 
     sobre = {
@@ -79,6 +97,12 @@ def sobre(request):
 
 
 def pid(request, pid):
+    config = Utils.get_config()
+    archive = Utils.get_archives()
+    colors = Utils.get_colors()
+    categorias = Utils.get_categorys()
+    livros = Utils.get_books()
+
     post = Utils.get_post_byid(pid)
 
     post = {
