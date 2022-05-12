@@ -1,5 +1,7 @@
-from django.db import models
+from datetime import datetime
+
 from django.conf import settings
+from django.db import models
 
 # Create your models here.
 
@@ -18,7 +20,7 @@ class Sobre(models.Model):
 class Apresentacao(models.Model):
     title = models.CharField("Título", max_length=100)
     text = models.TextField("Texto", null=False)
-    background = models.ImageField("Background", null=False)
+    background = models.ImageField("Background", null=False, upload_to="img/banners/")
     
     class Meta:
         db_table = "apresentation"
@@ -41,7 +43,7 @@ class Posts(models.Model):
     title = models.CharField("Título", max_length=100, null=False)
     text = models.TextField("Texto", null=False)
     date = models.DateTimeField("Date", null=False, auto_now=True)
-    banner = models.ImageField("Banner", null=False)
+    banner = models.ImageField("Banner", upload_to="img/posts/", null=False)
     
     categoria = models.ForeignKey(Categorias, on_delete=models.CASCADE)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=False)
@@ -56,7 +58,8 @@ class Posts(models.Model):
 class Livros(models.Model):
     title = models.CharField("Título", max_length=100, null=False)
     author = models.CharField("Autor", max_length=100, null=False)
-    banner = models.ImageField("Banner", null=False)
+    file = models.FileField("File", upload_to="pdf/", null=False)
+    banner = models.ImageField("Banner", upload_to="img/books/", null=False)
     descricao = models.TextField("Descrição", null=False)
     
 
@@ -71,7 +74,7 @@ class Config(models.Model):
     status = models.CharField("Status do Blog", max_length=100, null=False, default="[Status do Blog]")
     owner = models.CharField("Dono do Blog", max_length=100, null=False, default="[Dono do Blog]")
     year = models.IntegerField("Publicação", null=False, default="0000")
-    logo = models.ImageField("Logo do Blog", null=True)
+    logo = models.ImageField("Logo do Blog", upload_to="img/logos/", null=True)
 
     class Meta:
         db_table = "configs"

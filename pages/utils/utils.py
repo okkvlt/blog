@@ -35,10 +35,10 @@ class Utils:
             ]
         except:
             colors = [
-                "#87ad93",
-                "#526e5b",
+                "#a74242",
+                "#661515",
                 "#cccccc",
-                "#e6f8ec"
+                "#f8cfcf"
             ]
 
         return colors
