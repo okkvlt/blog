@@ -189,11 +189,11 @@
                     <br>
                     <ul style="margin-top: -10px;">
                         {% for year, data in archive.items %}
-                        <li><a href="posts/{{ year }}/">{{ year }} <span class="badge">{{ data.0 }}</span></a><br>
+                        <li><a href="/posts/{{ year }}">{{ year }} <span class="badge">{{ data.0 }}</span></a><br>
                             <ul style="margin-top: 5px;">
                                 {% for month, info in data.1.items %}
                                 <li style="padding: 2px;">
-                                    <a href="posts/{{ year }}/{{ month }}/">
+                                    <a href="/posts/{{ year }}/{{ month }}"">
                                         {{ info.0 }} <span class="badge">{{ info.1 }}</span>
                                     </a>
                                     <br>

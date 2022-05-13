@@ -138,15 +138,72 @@ def pid(request, pid):
 
 
 def year(request, year):
-    return HttpResponse(year)
+    config = Utils.get_config()
+    archive = Utils.get_archives()
+    colors = Utils.get_colors()
+    categorias = Utils.get_categorys()
+    livros = Utils.get_books()
+
+    posts = Utils.get_posts(by="year", year=year)
+
+    response = {
+        "config": config,
+        "archive": archive,
+        "colors": colors,
+        "categorias": categorias,
+        "livros": livros,
+        "posts": posts,
+        "year": year
+    }
+
+    return render(request, "posts.html", response)
 
 
 def month(request, year, month):
-    return HttpResponse(year)
+    config = Utils.get_config()
+    archive = Utils.get_archives()
+    colors = Utils.get_colors()
+    categorias = Utils.get_categorys()
+    livros = Utils.get_books()
+
+    posts = Utils.get_posts(by="month", year=year, month=month)
+
+    response = {
+        "config": config,
+        "archive": archive,
+        "colors": colors,
+        "categorias": categorias,
+        "livros": livros,
+        "posts": posts,
+        "year": year,
+        "month": month,
+    }
+
+    return render(request, "posts.html", response)
 
 
 def day(request, year, month, day):
-    return HttpResponse(year)
+    config = Utils.get_config()
+    archive = Utils.get_archives()
+    colors = Utils.get_colors()
+    categorias = Utils.get_categorys()
+    livros = Utils.get_books()
+
+    posts = Utils.get_posts(by="day", year=year, month=month, day=day)
+
+    response = {
+        "config": config,
+        "archive": archive,
+        "colors": colors,
+        "categorias": categorias,
+        "livros": livros,
+        "posts": posts,
+        "year": year,
+        "month": month,
+        "day": day,
+    }
+
+    return render(request, "posts.html", response)
 
 
 def category(request, category):

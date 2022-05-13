@@ -44,20 +44,16 @@ class Utils:
 
         return colors
 
-    def get_posts(self, author=None, category=None, by="id", num=0):
-        """
-        by:
-            1 - id (all)
-            2 - author
-            3 - categoria
-        """
-
+    def get_posts(self, author=None, category=None, year=None, month=None, day=None, by="id", num=0):
         posts = []
 
         modes = {
             "id": Posts.objects.order_by("-id"),
             "author": Posts.objects.filter(author__username=author).order_by("-id"),
-            "category": Posts.objects.filter(categoria__nome__iexact=category).order_by("-id")
+            "category": Posts.objects.filter(categoria__nome__iexact=category).order_by("-id"),
+            "year": Posts.objects.filter(date__year=year).order_by("-date"),
+            "month": Posts.objects.filter(date__year=year, date__month=month).order_by("-date"),
+            "day": Posts.objects.filter(date__year=year, date__month=month, date__day=day).order_by("-date"),
         }
 
         try:
@@ -115,18 +111,18 @@ class Utils:
         archive = {}
 
         months_translate = {
-            1: "Janeiro",
-            2: "Fevereiro",
-            3: "Março",
-            4: "Abril",
-            5: "Maio",
-            6: "Junho",
-            7: "Julho",
-            8: "Agosto",
-            9: "Setembro",
-            10: "Outubro",
-            11: "Novembro",
-            12: "Dezembro"
+            "01": "Janeiro",
+            "02": "Fevereiro",
+            "03": "Março",
+            "04": "Abril",
+            "05": "Maio",
+            "06": "Junho",
+            "07": "Julho",
+            "08": "Agosto",
+            "09": "Setembro",
+            "10": "Outubro",
+            "11": "Novembro",
+            "12": "Dezembro"
         }
 
         first_year = Posts.objects.order_by("date")[0].date.year
@@ -146,7 +142,7 @@ class Utils:
             archive[c] = [n, {}]
 
             for post in posts_in_year:
-                month = post.date.month
+                month = str(post.date.month).zfill(2)
                 translated_month = months_translate[month]
 
                 if month in archive[c][1].keys():
