@@ -21,7 +21,7 @@ def index(request):
     categorias = Utils.get_categorys()
     livros = Utils.get_books()
 
-    posts = Utils.get_posts(3)
+    posts = Utils.get_posts(by="id", num=3)
     apresentacao = Utils.get_apresentation()
     livros = Utils.get_books(3)
 

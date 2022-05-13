@@ -44,7 +44,15 @@ class Utils:
 
         return colors
 
-    def get_posts(self, author=None, category=None, year=None, month=None, day=None, by="id", num=0):
+    def get_posts(self,
+                  author: str = None,
+                  category: str = None,
+                  year: int = None,
+                  month: int = None,
+                  day: int = None,
+                  by: str = "id",
+                  num: int = 0):
+
         posts = []
 
         modes = {
