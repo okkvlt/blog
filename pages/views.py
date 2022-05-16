@@ -1,6 +1,7 @@
 
+import requests
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
-from django.http import HttpResponse
 
 from pages.models import *
 from pages.utils.utils import Utils
@@ -13,30 +14,32 @@ Utils = Utils()
 
 def index(request):
     if request.method != "GET":
-        return HttpResponse("Método não permitido nesta página!")
+        return HttpResponse("Método não permitido nesta página!", status=405)
 
     config = Utils.get_config()
     archive = Utils.get_archives()
     colors = Utils.get_colors()
     categorias = Utils.get_categorys()
-    livros = Utils.get_books()
+    livros = Utils.get_books() #widget
 
-    posts = Utils.get_posts(by="id", num=3)
     apresentacao = Utils.get_apresentation()
-    livros = Utils.get_books(3)
-
-    index = {
+    livros = Utils.get_books(3) #last books
+    
+    response = {
         "config": config,
-        "posts": posts,
         "apresentacao": apresentacao,
         "archive": archive,
-        "livros": livros,
         "colors": colors,
         "categorias": categorias,
         "livros": livros,
     }
+    
+    posts = requests.get("http://127.0.0.1:8000/api/posts?method=all&page=1").json()
+    
+    if not posts.get("status"):
+        response["posts"] = posts
 
-    return render(request, "index.html", index)
+    return render(request, "index.html", response)
 
 
 def posts(request):
@@ -57,13 +60,25 @@ def posts(request):
         "livros": livros,
     }
 
-    if not "q" in request.GET:
-        response["posts"] = Utils.get_posts()
+    key = request.GET.get("q")
+
+    if not key:
+        r = requests.get("http://127.0.0.1:8000/api/posts?method=all&page=1").json()
+
+        if not r.get("status"):
+            response["posts"] = r
+
+        response["method"] = "all"
 
         return render(request, "posts.html", response)
 
-    response["posts"] = Utils.search_for_posts(request.GET["q"])
+    r = requests.get(f'http://127.0.0.1:8000/api/search?method=posts&key={key}&page=1').json()
+
+    if not r.get("status"):
+        response["posts"] = r
+
     response["query"] = request.GET["q"]
+    response["method"] = "search"
 
     return render(request, "posts.html", response)
 
@@ -144,17 +159,20 @@ def year(request, year):
     categorias = Utils.get_categorys()
     livros = Utils.get_books()
 
-    posts = Utils.get_posts(by="year", year=year)
-
     response = {
         "config": config,
         "archive": archive,
         "colors": colors,
         "categorias": categorias,
         "livros": livros,
-        "posts": posts,
-        "year": year
+        "year": year,
+        "method": "year",
     }
+
+    r = requests.get(f'http://127.0.0.1:8000/api/posts?method=year&year={year}&page=1').json()
+
+    if not r.get("status"):
+        response["posts"] = r
 
     return render(request, "posts.html", response)
 
@@ -166,18 +184,21 @@ def month(request, year, month):
     categorias = Utils.get_categorys()
     livros = Utils.get_books()
 
-    posts = Utils.get_posts(by="month", year=year, month=month)
-
     response = {
         "config": config,
         "archive": archive,
         "colors": colors,
         "categorias": categorias,
         "livros": livros,
-        "posts": posts,
         "year": year,
         "month": month,
+        "method": "month",
     }
+
+    r = requests.get(f'http://127.0.0.1:8000/api/posts?method=month&year={year}&month={month}&page=1').json()
+
+    if not r.get("status"):
+        response["posts"] = r
 
     return render(request, "posts.html", response)
 
@@ -189,19 +210,22 @@ def day(request, year, month, day):
     categorias = Utils.get_categorys()
     livros = Utils.get_books()
 
-    posts = Utils.get_posts(by="day", year=year, month=month, day=day)
-
     response = {
         "config": config,
         "archive": archive,
         "colors": colors,
         "categorias": categorias,
         "livros": livros,
-        "posts": posts,
         "year": year,
         "month": month,
         "day": day,
+        "method": "day",
     }
+
+    r = requests.get(f'http://127.0.0.1:8000/api/posts?method=day&year={year}&month={month}&day={day}&page=1').json()
+
+    if not r.get("status"):
+        response["posts"] = r
 
     return render(request, "posts.html", response)
 
@@ -213,17 +237,20 @@ def category(request, category):
     categorias = Utils.get_categorys()
     livros = Utils.get_books()
 
-    posts = Utils.get_posts(by="category", category=category)
-
     response = {
         "config": config,
         "archive": archive,
         "colors": colors,
         "categorias": categorias,
         "livros": livros,
-        "posts": posts,
-        "cat": category
+        "cat": category,
+        "method": "category",
     }
+
+    r = requests.get(f'http://127.0.0.1:8000/api/posts?method=category&category={category}&page=1').json()
+
+    if not r.get("status"):
+        response["posts"] = r
 
     return render(request, "posts.html", response)
 
@@ -235,16 +262,19 @@ def author(request, author):
     categorias = Utils.get_categorys()
     livros = Utils.get_books()
 
-    posts = Utils.get_posts(by="author", author=author)
-
     response = {
         "config": config,
         "archive": archive,
         "colors": colors,
         "categorias": categorias,
         "livros": livros,
-        "posts": posts,
-        "author": author
+        "author": author,
+        "method": "author",
     }
+
+    r = requests.get(f'http://127.0.0.1:8000/api/posts?method=author&author={author}&page=1').json()
+
+    if not r.get("status"):
+        response["posts"] = r
 
     return render(request, "posts.html", response)

@@ -13,9 +13,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-    <!--JS-->
-    <script type="module" src="{% static 'js/index/main.js' %}"></script>
-
     <!--CSS-->
     <link rel="stylesheet" href="{% static 'css/main/menu.css' %}">
     <link rel="stylesheet" href="{% static 'css/index/index.css' %}">
@@ -212,36 +209,53 @@
                     Nenhum post até o momento!
                 </div>
                 {% endif %}
-                {% for id, title, text, image, date, author, keys in posts %}
-                <a href="/posts/id/{{ id }}">
-                    <div id="{{ id }}" class="row post">
+                {% for id, post in posts.items %}
+                {% if not "more_posts" in id %}
+                <a class="p" href="/posts/id/{{ post.id }}">
+                    <div onmouseover="mouse_on_post(this, '{{colors.1}}')" onmouseleave="mouse_leave_post(this, '{{colors.0}}')" id="{{ post.id }}" class="row post">
                         <div class="col-sm-3">
-                            <div id="{{ id }}-icon" style="background-image: url('{{ image.url }}');" class="icon-post">
+                            <div id="{{ post.id }}-icon" style="background-image: url('{{ post.banner }}');" class="icon-post">
                             </div>
                         </div>
                         <div class="col-sm-9 content-post insert-br-xs">
-                            <div class="data-post">{{ date|date:'d/m/y' }}</div>
-                            <h2 id="{{ id }}-title" class="title-post">{{ title }}</h2>
-                            <div id="{{ id }}-text" class="text-post">
-                                {{ text }}
+                            <div class="data-post">{{ post.datetime.day }} / {{ post.datetime.month }} / {{ post.datetime.year }}</div>
+                            <h2 id="{{ post.id }}-title" class="title-post">{{ post.title }}</h2>
+                            <div id="{{ post.id }}-text" class="text-post">
+                                {{ post.text }}
                             </div>
                             <div class="author-post">
-                                Autor: {{ author }}
+                                Autor: {{ post.author.username }}
                             </div>
-                            {% if keys %}
+                            {% if post.keywords %}
                             <div style="width: 71%; margin-left: 25%; background-color: transparent; text-align: left;" class="author-post">
                                 Encontrados: | 
-                                {% for key in keys %}
+                                {% for key in post.keywords %}
                                 {{ key }} | 
                                 {% endfor %}
                             </div>
-                        {% endif %}
+                            {% endif %}
                         </div>
                     </div>
                 </a>
                 <br>
+                {% endif %}
                 {% endfor %}
-
+                <br>
+                {% if posts.more_posts %}
+                <button onclick="more_posts(method='{{method}}',
+                                            categoria='{{cat}}',
+                                            author='{{author}}',
+                                            y='{{year}}',
+                                            m='{{month}}',
+                                            d='{{day}}',
+                                            key='{{ query }}')"
+                        id="see-more"
+                        style="color: {{colors.0}}; border-radius: 5px; border: {{colors.0}} solid 1px;"
+                        onmouseover="mouse_on_button('{{colors.0}}')"
+                        onmouseleave="mouse_leave_button('{{colors.0}}')"> 
+                    Ver mais! 
+                </button>
+                {% endif %}
             </div>
 
             <div id="right-content" class="insert-br-md col-lg-3">
@@ -303,55 +317,8 @@
         <p>© {{ config.0 }}, {{ config.2 }}. Feito por {{ config.3 }}.</p>
     </div>
 
-    <script>
-        $(".post").hover(function () {
-            let id = $(this).attr("id");
-
-            let icon = "#" + id + "-icon";
-            let title = "#" + id + "-title";
-            let text = "#" + id + "-text";
-
-            $(icon).css({"filter": "contrast(145%) brightness(100%)"});
-            $(title).css({"font-weight": "lighter", "color": "{{ colors.1 }}"});
-            $(text).css({"font-weight": "lighter", "color": "rgb(100, 100, 100)"});
-        }, function () {
-            let id = $(this).attr("id");
-
-            let icon = "#" + id + "-icon";
-            let title = "#" + id + "-title";
-            let text = "#" + id + "-text";
-
-            $(icon).css({"filter": "contrast(100%) brightness(65%)"});
-            $(title).css({"font-weight": "", "color": "{{ colors.0 }}"});
-            $(text).css({"font-weight": "", "color": "rgb(151, 151, 151)"});
-        });
-
-        $(".livro").hover(function () {
-            let id = $(this).attr("id");
-
-            let icon = "#" + id + "-livro-icon";
-            let title = "#" + id + "-livro-title";
-            let autor = "#" + id + "-livro-autor";
-            let text = "#" + id + "-livro-text";
-
-            $(icon).css({"filter": "grayscale(30%) contrast(125%) brightness(100%)"});
-            $(title).css({"font-weight": "lighter", "color": "{{ colors.1 }}"});
-            $(autor).css({"font-weight": "lighter", "color": "{{ colors.1 }}"});
-            $(text).css({"font-weight": "lighter", "color": "rgb(100, 100, 100)"});
-        }, function () {
-            let id = $(this).attr("id");
-
-            let icon = "#" + id + "-livro-icon";
-            let title = "#" + id + "-livro-title";
-            let autor = "#" + id + "-livro-autor";
-            let text = "#" + id + "-livro-text";
-
-            $(icon).css({"filter": "grayscale(0%) contrast(100%) brightness(65%)"});
-            $(title).css({"font-weight": "", "color": "{{ colors.0 }}"});
-            $(autor).css({"font-weight": "", "color": "{{ colors.0 }}"});
-            $(text).css({"font-weight": "", "color": "rgb(151, 151, 151)"});
-        });
-    </script>
+    <!--JS-->
+    <script type="module" src="{% static 'js/index/main.js' %}"></script>
 
 </body>
 

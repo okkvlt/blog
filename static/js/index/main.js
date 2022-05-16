@@ -1,118 +1,77 @@
-import { insert_br_xs, delete_br_xs } from './functions.js';
+import {
+    post_hover, post_leave,
+    livro_hover, livro_leave,
+    button_hover, button_leave,
+    see_more_posts
+} from './functions.js';
 
-import { open_submenu, close_submenu, fix_menu, drop_menu } from '../main/menu.js';
-import { center_banner, drop_banner } from '../main/banner.js';
-import { insert_br_md, delete_br_md } from '../main/br.js';
+import { loaded_menu, dinamic_menu } from './menu.js';
+import { dinamic_recursive, loaded_recursive } from './recursive.js';
 
-const hHeader = 150;
 
-let width = $(window).width();
+const NAV_HEIGHT = 150;
+const CURRENT_HEIGHT = window.scrollY;
 
-if (width < 750) {
-    $(".submenu").css({
-        "transition": "none",
-        "box-shadow": "0 0 0",
-        "position": "relative",
-        "border-radius": "0"
-    });
+const MOBILE = 750;
+const MIDDLE = 1183;
 
-    $(".apresentation-text").css("padding", "0px 0px");
+const WIDTH = $(window).width();
+const HEIGHT = $(window).height();
 
-    open_submenu();
-    center_banner();
-    drop_menu();
-} else {
-    $(".submenu-hover").hover(open_submenu, close_submenu);
-}
+let post_page = 1;
 
-if (width < 750) {
-    insert_br_xs();
-}
-
-if (width < 1183) {
-    insert_br_md();
-}
-
-if (window.scrollY > hHeader) {
-    fix_menu();
-} else {
-    drop_menu();
-}
+loaded_recursive(WIDTH, MOBILE, MIDDLE);
+loaded_menu(CURRENT_HEIGHT, NAV_HEIGHT);
 
 $(window).resize(function () {
-    width = $(window).width();
-    if (width < 750) {
-        $(".submenu").css({
-            "transition": "none",
-            "box-shadow": "0 0 0",
-            "position": "relative",
-            "border-radius": "0"
-        });
+    let width = $(window).width();
+    let height = window.scrollY;
 
-        $(".apresentation-text").css("padding", "0px 0px");
-
-        $(".submenu-hover").hover(open_submenu, open_submenu);
-
-        open_submenu();
-        center_banner();
-        drop_menu();
-        insert_br_xs();
-    } else {
-        $(".submenu").css({
-            "transition": "all 0.7s",
-            "box-shadow": "0 2px 5px rgba(0, 0, 0, 0.35)",
-            "position": "absolute",
-            "border-radius": "5px"
-        });
-
-        $(".apresentation-text").css("padding", "20px 75px");
-
-        $(".submenu-hover").hover(open_submenu, close_submenu);
-
-        close_submenu();
-        drop_banner();
-        delete_br_xs();
-
-        if (window.scrollY > hHeader) {
-            fix_menu();
-        } else {
-            drop_menu();
-        }
-    }
-
-    if (width < 1182) {
-        insert_br_md();
-    } else {
-        delete_br_md();
-    }
+    dinamic_recursive(width, height, MOBILE, MIDDLE, NAV_HEIGHT);
 });
 
 window.addEventListener("scroll", function () {
-    if (width > 750) {
-        if (window.scrollY > hHeader) {
-            fix_menu();
-        } else {
-            drop_menu();
-        }
-    } else {
-        drop_menu();
-    }
+    let width = $(window).width();
+    let height = window.scrollY;
+
+    dinamic_menu(width, height, MOBILE, NAV_HEIGHT);
 });
 
 $("#scrolltop").click(function () {
     $("html, body").animate({ scrollTop: "0" });
 });
 
-$(".apresentation-button").click(function () {
-    window.location.href = "/sobre";
-});
-
-if ($(document).height() <= $(window).height()) {
+if ($(document).height() <= HEIGHT) {
     $(".footer").css({
         "position": "fixed"
     });
 }
 
-let icon_post = 189.375;
+window.mouse_on_post = function mouse_on_post(x, color_1) {
+    post_hover(x, color_1);
+}
 
-$(".content-post").css("height", icon_post);
+window.mouse_leave_post = function mouse_leave_post(x, color_0) {
+    post_leave(x, color_0);
+}
+
+window.mouse_on_book = function mouse_on_book(x, color_1) {
+    livro_hover(x, color_1);
+}
+
+window.mouse_leave_book = function mouse_on_book(x, color_0) {
+    livro_leave(x, color_0);
+}
+
+window.mouse_on_button = function mouse_on_button(color_0) {
+    button_hover(color_0);
+}
+
+window.mouse_leave_button = function mouse_leave_button(color_0) {
+    button_leave(color_0);
+}
+
+window.more_posts = function more_posts(method, categoria, author, y, m, d, key) {
+    post_page += 1;
+    see_more_posts(post_page, method, categoria, author, y, m, d, key);
+}
