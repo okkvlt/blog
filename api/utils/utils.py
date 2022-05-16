@@ -74,35 +74,50 @@ class Utils:
 
         response = {}
 
+        posts_list = []
+
         for word in key.split():
             querys = methods[method](word)
 
             for query in querys:
                 for r in query:
-                    if not r.id in response.keys():
-                        response[r.id] = r.as_dict()
+                    exists = False
 
-                    if not "keywords" in response[r.id].keys():
-                        response[r.id]["keywords"] = [word]
-                    else:
-                        if not word in response[r.id]["keywords"]:
-                            response[r.id]["keywords"].append(word)
+                    for i, post in enumerate(posts_list):
+                        if post["id"] == r.id:
+                            exists = True
+                            posicao = i
+
+                    if exists == False:
+                        p = r.as_dict()
+                        p["keywords"] = [word]
+                        posts_list.append(p)
+
+                    if exists == True:
+                        if not word in posts_list[posicao]["keywords"]:
+                            posts_list[posicao]["keywords"].append(word)
 
         if page:
-            items_page = {}
+            pages = {
+                "posts": 5,
+                "books": 15
+            }
 
-            start = (page - 1) * 5
-            end = start + 5
+            start = (page - 1) * pages[method]
+            end = start + pages[method]
 
-            keys = list(response)[start:end]
+            if posts_list[end:end+5]:
+                response["more"] = True
+            else:
+                response["more"] = False
 
-            for x in response:
-                if x in keys:
-                    items_page[x] = response[x]
+            posts_list = posts_list[start:end]
 
-            if len(list(response)[end:end+5]) != 0:
-                items_page["more_posts"] = True
-
-            return items_page
+        if posts_list:
+            response["status"] = "ok"
+            response["posts"] = posts_list
+        else:
+            response["status"] = "error"
+            response["info"] = "nothing found!"
 
         return response

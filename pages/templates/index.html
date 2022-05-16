@@ -219,8 +219,7 @@
                 <p class="text-post">Nenhum post até o momento!</p>
                 <br>
                 {% endif %}
-                {% for id, post in posts.items %}
-                {% if not "more_posts" in id %}
+                {% for post in posts.posts %}
                 <a class="p" href="/posts/id/{{ post.id }}">
                     <div onmouseover="mouse_on_post(this, '{{colors.1}}')" onmouseleave="mouse_leave_post(this, '{{colors.0}}')" id="{{ post.id }}" class="row post">
                         <div class="col-sm-3">
@@ -240,7 +239,6 @@
                     </div>
                 </a>
                 <br>
-                {% endif %}
                 {% endfor %}
 
                 <h2 style="margin-top: 10px">Últimos Livros</h2>

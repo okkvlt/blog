@@ -209,8 +209,7 @@
                     Nenhum post até o momento!
                 </div>
                 {% endif %}
-                {% for id, post in posts.items %}
-                {% if not "more_posts" in id %}
+                {% for post in posts.posts %}
                 <a class="p" href="/posts/id/{{ post.id }}">
                     <div onmouseover="mouse_on_post(this, '{{colors.1}}')" onmouseleave="mouse_leave_post(this, '{{colors.0}}')" id="{{ post.id }}" class="row post">
                         <div class="col-sm-3">
@@ -238,17 +237,18 @@
                     </div>
                 </a>
                 <br>
-                {% endif %}
                 {% endfor %}
                 <br>
-                {% if posts.more_posts %}
+                {% if posts.more %}
                 <button onclick="more_posts(method='{{method}}',
                                             categoria='{{cat}}',
                                             author='{{author}}',
                                             y='{{year}}',
                                             m='{{month}}',
                                             d='{{day}}',
-                                            key='{{ query }}')"
+                                            key='{{ query }}',
+                                            color_main='{{colors.0}}',
+                                            color_strong='{{colors.1}}')"
                         id="see-more"
                         style="color: {{colors.0}}; border-radius: 5px; border: {{colors.0}} solid 1px;"
                         onmouseover="mouse_on_button('{{colors.0}}')"

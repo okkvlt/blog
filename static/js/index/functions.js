@@ -76,7 +76,7 @@ export function button_leave(color_0) {
     });
 }
 
-export function see_more_posts(i, method, categoria, author, y, m, d, key) {
+export function see_more_posts(i, method, categoria, author, y, m, d, key, color_main, color_strong) {
     let methods = {
         "all": 'http://127.0.0.1:8000/api/posts?method=all&page=' + i,
         "category": 'http://127.0.0.1:8000/api/posts?method=category&category=' + categoria + '&page=' + i,
@@ -91,25 +91,25 @@ export function see_more_posts(i, method, categoria, author, y, m, d, key) {
 
     $.getJSON(api, function (posts) {
         if (posts["status"] != "error") {
-            if (posts["more_posts"] != true) {
+            if (posts["more"] != true) {
                 $("#see-more").css("display", "none");
             }
 
-            for (let post in posts) {
-                let id = posts[post]["id"];
-                let title = posts[post]["title"];
-                let text = posts[post]["text"];
-                let banner = posts[post]["banner"];
-                let year = posts[post]["datetime"]["year"];
-                let month = posts[post]["datetime"]["month"];
-                let day = posts[post]["datetime"]["day"];
-                let author = posts[post]["author"]["username"];
+            $.each(posts["posts"], function (index, post) {
+                let id = post.id;
+                let title = post.title;
+                let text = post.text;
+                let banner = post.banner;
+                let year = post.datetime.year;
+                let month = post.datetime.month;
+                let day = post.datetime.day;
+                let author = post.author.username;
 
                 let last = $(".p").last().next();
 
                 let html = `
                     <a class="p" href="/posts/id/` + id + `">
-                        <div id="` + id + `" onmouseover="mouse_on_post(this, '{{colors.1}}')" onmouseleave="mouse_leave_post(this, '{{colors.0}}')" class="row post">
+                        <div id="` + id + `" onmouseover="mouse_on_post(this, '` + color_strong + `')" onmouseleave="mouse_leave_post(this, '` + color_main + `')" class="row post">
                             <div class="col-sm-3">
                                 <div id="` + id + `-icon" style="background-image: url('` + banner + `');" class="icon-post">
                                 </div>
@@ -125,8 +125,8 @@ export function see_more_posts(i, method, categoria, author, y, m, d, key) {
                                 </div>
                 `
 
-                if (posts[post]["keywords"] != null) {
-                    let keywords = posts[post]["keywords"];
+                if (post.keywords != null) {
+                    let keywords = post.keywords;
 
                     let keys = `
                         <div style="width: 71%; margin-left: 25%; background-color: transparent; text-align: left;" class="author-post">
@@ -152,7 +152,7 @@ export function see_more_posts(i, method, categoria, author, y, m, d, key) {
                 `
 
                 last.after(html);
-            }
+            });
         }
     });
 }

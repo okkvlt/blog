@@ -11,6 +11,8 @@ from pages.utils.utils import Utils
 
 Utils = Utils()
 
+API = "http://127.0.0.1:8000/api/"
+
 
 def index(request):
     if request.method != "GET":
@@ -20,11 +22,11 @@ def index(request):
     archive = Utils.get_archives()
     colors = Utils.get_colors()
     categorias = Utils.get_categorys()
-    livros = Utils.get_books() #widget
+    livros = Utils.get_books()  # widget
 
     apresentacao = Utils.get_apresentation()
-    livros = Utils.get_books(3) #last books
-    
+    livros = Utils.get_books(3)  # last books
+
     response = {
         "config": config,
         "apresentacao": apresentacao,
@@ -33,11 +35,16 @@ def index(request):
         "categorias": categorias,
         "livros": livros,
     }
-    
-    posts = requests.get("http://127.0.0.1:8000/api/posts?method=all&page=1").json()
-    
-    if not posts.get("status"):
-        response["posts"] = posts
+
+    params = {
+        "method": "all",
+        "page": "1"
+    }
+
+    r = requests.get(API + "posts", params=params).json()
+
+    if r.get("status") == "ok":
+        response["posts"] = r
 
     return render(request, "index.html", response)
 
@@ -63,18 +70,29 @@ def posts(request):
     key = request.GET.get("q")
 
     if not key:
-        r = requests.get("http://127.0.0.1:8000/api/posts?method=all&page=1").json()
-
-        if not r.get("status"):
-            response["posts"] = r
-
         response["method"] = "all"
+
+        params = {
+            "method": "all",
+            "page": "1"
+        }
+
+        r = requests.get(API + "posts", params=params).json()
+
+        if r.get("status") == "ok":
+            response["posts"] = r
 
         return render(request, "posts.html", response)
 
-    r = requests.get(f'http://127.0.0.1:8000/api/search?method=posts&key={key}&page=1').json()
+    params = {
+        "method": "posts",
+        "page": "1",
+        "key": key,
+    }
 
-    if not r.get("status"):
+    r = requests.get(API + "search", params=params).json()
+
+    if r.get("status") == "ok":
         response["posts"] = r
 
     response["query"] = request.GET["q"]
@@ -169,9 +187,15 @@ def year(request, year):
         "method": "year",
     }
 
-    r = requests.get(f'http://127.0.0.1:8000/api/posts?method=year&year={year}&page=1').json()
+    params = {
+        "method": "year",
+        "page": "1",
+        "year": year,
+    }
 
-    if not r.get("status"):
+    r = requests.get(API + "posts", params=params).json()
+
+    if r.get("status") == "ok":
         response["posts"] = r
 
     return render(request, "posts.html", response)
@@ -195,9 +219,16 @@ def month(request, year, month):
         "method": "month",
     }
 
-    r = requests.get(f'http://127.0.0.1:8000/api/posts?method=month&year={year}&month={month}&page=1').json()
+    params = {
+        "method": "month",
+        "page": "1",
+        "year": year,
+        "month": month,
+    }
 
-    if not r.get("status"):
+    r = requests.get(API + "posts", params=params).json()
+
+    if r.get("status") == "ok":
         response["posts"] = r
 
     return render(request, "posts.html", response)
@@ -222,9 +253,17 @@ def day(request, year, month, day):
         "method": "day",
     }
 
-    r = requests.get(f'http://127.0.0.1:8000/api/posts?method=day&year={year}&month={month}&day={day}&page=1').json()
+    params = {
+        "method": "day",
+        "page": "1",
+        "year": year,
+        "month": month,
+        "day": day,
+    }
 
-    if not r.get("status"):
+    r = requests.get(API + "posts", params=params).json()
+
+    if r.get("status") == "ok":
         response["posts"] = r
 
     return render(request, "posts.html", response)
@@ -247,9 +286,15 @@ def category(request, category):
         "method": "category",
     }
 
-    r = requests.get(f'http://127.0.0.1:8000/api/posts?method=category&category={category}&page=1').json()
+    params = {
+        "method": "category",
+        "page": "1",
+        "category": category,
+    }
 
-    if not r.get("status"):
+    r = requests.get(API + "posts", params=params).json()
+
+    if r.get("status") == "ok":
         response["posts"] = r
 
     return render(request, "posts.html", response)
@@ -272,9 +317,15 @@ def author(request, author):
         "method": "author",
     }
 
-    r = requests.get(f'http://127.0.0.1:8000/api/posts?method=author&author={author}&page=1').json()
+    params = {
+        "method": "author",
+        "page": "1",
+        "author": author,
+    }
 
-    if not r.get("status"):
+    r = requests.get(API + "posts", params=params).json()
+
+    if r.get("status") == "ok":
         response["posts"] = r
 
     return render(request, "posts.html", response)

@@ -71,7 +71,7 @@ window.mouse_leave_button = function mouse_leave_button(color_0) {
     button_leave(color_0);
 }
 
-window.more_posts = function more_posts(method, categoria, author, y, m, d, key) {
+window.more_posts = function more_posts(method, categoria, author, y, m, d, key, color_main, color_strong) {
     post_page += 1;
-    see_more_posts(post_page, method, categoria, author, y, m, d, key);
+    see_more_posts(post_page, method, categoria, author, y, m, d, key, color_main, color_strong);
 }

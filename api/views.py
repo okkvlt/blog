@@ -57,17 +57,22 @@ def posts(request):
 
         posts = modes[request.GET["method"]][start:end]
 
-        if len(modes[request.GET["method"]][end:end+5]) != 0:
-            response["more_posts"] = True
+        if len(modes[request.GET["method"]][end:end+5]) > 0:
+            response["more"] = True
+        else:
+            response["more"] = False
+
+    posts_list = []
 
     for post in posts:
-        response[post.id] = post.as_dict()
+        posts_list.append(post.as_dict())
 
-    if not response:
-        return JsonResponse({
-            "status": "error",
-            "info": "nothing found!"
-        })
+    if not posts_list:
+        response["status"] = "error"
+        response["info"] = "nothing found!"
+    else:
+        response["status"] = "ok"
+        response["posts"] = posts_list
 
     return JsonResponse(response)
 
@@ -100,17 +105,22 @@ def books(request):
 
         books = modes[request.GET["method"]][start:end]
 
-        if len(modes[request.GET["method"]][end:end+5]) != 0:
-            response["more_posts"] = True
+        if len(modes[request.GET["method"]][end:end+5]) > 0:
+            response["more"] = True
+        else:
+            response["more"] = False
+
+    books_list = []
 
     for book in books:
-        response[book.id] = book.as_dict()
+        books_list.append(book.as_dict())
 
-    if not response:
-        return JsonResponse({
-            "status": "error",
-            "info": "nothing found!"
-        })
+    if not books_list:
+        response["status"] = "error"
+        response["info"] = "nothing found!"
+    else:
+        response["status"] = "ok"
+        response["books"] = books_list
 
     return JsonResponse(response)
 
@@ -125,14 +135,19 @@ def search(request):
     if Utils.check(request=request, methods_params=methods):
         return JsonResponse(Utils.check(request=request, methods_params=methods))
 
+    if request.GET.get("page"):
+        page = int(request.GET.get("page"))
+    else:
+        page = None
+
     modes = {
         "books": Utils.search(method="books",
                               key=request.GET.get("key"),
-                              page=int(request.GET.get("page"))),
+                              page=page),
 
         "posts": Utils.search(method="posts",
                               key=request.GET.get("key"),
-                              page=int(request.GET.get("page"))),
+                              page=page),
     }
 
     response = modes[request.GET["method"]]
